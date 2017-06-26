@@ -12,8 +12,8 @@ const app = express();
 app.use(parser.json());
 app.use(parser.urlencoded({ extended: false }));
 
-router.post('/login', (req, res, next) => {
-  users.authenticateUser(req.body.userName, req.body.password, (err, user) => {
+router.post('/signin', (req, res, next) => {
+  users.authenticateUser(req.body.email, req.body.password, (err, user) => {
     if (err) {
       next(err);
     } else {
@@ -74,6 +74,7 @@ router.get('/receive_code', (req, res) => {
             bearer: retToken,
           },
         }, (err, response, body) => {
+          console.log(err);
           const info = JSON.parse(body);
           const profile = info.data[0].profiles[0].id;
           users.updateUser(req.session.user.id, { TTAM_profile_id: profile })
@@ -132,6 +133,7 @@ router.get('/genome', (req, res, err) => {
     const data = JSON.parse(bod);
     const variant = data.variants.map(a => (a.allele));
     users.updateSNPs({ user_id: req.session.user.id, snp_id: 5, variant });
+    res.redirect('/nutrition/');
   });
 });
 

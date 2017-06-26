@@ -10,6 +10,7 @@ require('dotenv').config();
 const index = require('./routes/index');
 const users = require('./routes/users');
 const nutrition = require('./routes/nutrition');
+const profile = require('./routes/profile');
 
 const app = express();
 
@@ -29,6 +30,7 @@ app.use(session({ keys: ['dskjf0qi340oij2k3j93387dlk@#$', '@#$WFEW#$CFDSdsfdsdlk
 app.use('/', index);
 app.use(users);
 app.use('/nutrition', nutrition);
+app.use('/profile', profile);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

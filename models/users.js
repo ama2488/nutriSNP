@@ -24,12 +24,12 @@ Users.createUser = (data, callback) => {
   });
 };
 
-Users.authenticateUser = (userName, password, callback) => {
-  Users().where({ userName }).first().then((user) => {
+Users.authenticateUser = (email, password, callback) => {
+  Users().where({ email }).first().then((user) => {
     if (!user) {
       return callback('Not a valid user.');
     }
-    bcrypt.compare(password, user.password_digest, (err, isMatch) => {
+    bcrypt.compare(password, user.password, (err, isMatch) => {
       if (err || !isMatch) {
         return callback("Username and password don't match");
       }
@@ -38,10 +38,12 @@ Users.authenticateUser = (userName, password, callback) => {
   });
 };
 
-Users.updateUser(id, data) {
-  return knex('users')
+Users.updateUser = (id, data) => knex('users')
   .where('id', id)
   .update(data);
-}
+
+Users.updateSNPs = (data) => {
+  knex('user_SNPs').insert(data);
+};
 
 module.exports = Users;

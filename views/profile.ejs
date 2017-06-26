@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+
+<%- include ./partials/head %>
+
+  <body>
+    <%- include ./partials/navbar %>
+      <h1><%= title %></h1>
+      <div class='container'>
+        <form action="/profile" class='authenticate'>
+          <section class="input-field col s12">
+            <input name="age" id="age" type="number" class="validate" required="" aria-required="true" value='21'>
+            <label class="active" for="age">age (years)</label>
+          </section>
+          <section class="input-field col s12">
+            <input name="height" id="height" type="number" class="validate" required="" aria-required="true">
+            <label class="active" for="height">height (inches)</label>
+          </section>
+          <section class="input-field col s12">
+            <input name="weight" id="weight" type="number" class="validate" required="" aria-required="true">
+            <label class="active" for="weight">weight (lbs)</label>
+          </section>
+          <section class="input-field col s12">
+            <select name="gender">
+        <option value="" disabled selected>Gender</option>
+        <option value="0">Male</option>
+        <option value="1">Female</option>
+      </select>
+          </section>
+          <section class="">
+            <input type="submit" class="waves-effect waves-green btn-flat" value="Save">
+          </section>
+        </form>
+      </div>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.min.js"></script>
+  </body>
+
+</html>
