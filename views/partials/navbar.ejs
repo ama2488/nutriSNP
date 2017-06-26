@@ -1,0 +1,97 @@
+<nav>
+  <div class="nav-wrapper grey darken-3">
+    <a href="/" class="brand-logo thin grey-text">
+    nutriSNP
+    </a>
+    <a href="#" data-activates="mobile-menu" class="button-collapse hide-on-lg-and-up right"><i class="material-icons">menu</i></a>
+    <ul id="nav" class="right hide-on-med-and-down">
+      <li><a href="/">Home</a></li>
+      <li><a href="/nutrition/1">Nutrition</a></li>
+      <li><a href="/profile/1">Profile</a></li>
+      <% if (!user) { %>
+        <li><a href="#sign_in">Sign In</a></li>
+        <% }; %>
+          <% if (user) { %>
+            <li>
+              <a href="#sign_out">
+                <%= user.first %>
+              </a>
+            </li>
+            <% }; %>
+    </ul>
+    <ul class="side-nav right" id="mobile-menu">
+      <li><a href="/">Home</a></li>
+      <li><a href="/nutrition/1">Nutrition</a></li>
+      <li><a href="/profile/1">Profile</a></li>
+      <% if (!user) { %>
+        <li><a href="#sign_in">Sign In</a></li>
+        <% }; %>
+          <% if (user) { %>
+            <li>
+              <a href="#sign_out">
+                <%= user.first %>
+              </a>
+            </li>
+            <% }; %>
+    </ul>
+  </div>
+</nav>
+
+<div id="sign_in" class="modal">
+  <div class="modal-content">
+    <h4>Sign In</h4>
+    <form action="/signin" class='authenticate'>
+      <section class="input-field inline">
+        <input name="email" id="email" type="email" class="validate" required="" aria-required="true">
+        <label class="active" for="email">Email</label>
+      </section>
+      <section class="input-field inline">
+        <input name="password" id="password" type="password" class="validate" required="" aria-required="true">
+        <label class="active" for="password">Password</label>
+      </section>
+      <section class="">
+        <input type="submit" class="modal-action waves-effect waves-green btn-flat" value="Sign In">
+        <a href="#sign_up" class="modal-action modal-close waves-effect waves-green btn-flat">Create Account</a>
+        <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+      </section>
+    </form>
+  </div>
+</div>
+
+<div id="sign_out" class="modal">
+  <div class="modal-content">
+    <h4>Sign Out?</h4>
+  </div>
+  <form action='/signout' method='post'>
+    <input type="submit" class="modal-action modal-close waves-effect waves-green btn-flat" value="Sign Out">
+    <a href="#!" class="modal-action waves-effect modal-close waves-green btn-flat">Cancel</a>
+  </form>
+</div>
+
+<div id="sign_up" class="modal">
+  <div class="modal-content">
+    <h4>Sign Up!</h4>
+    <form action="/signup" method="post">
+      <section class="input-field inline">
+        <input name="first" id="first" type="text" class="validate" required="" aria-required="true">
+        <label class="active" for="name">First</label>
+      </section>
+      <section class="input-field inline">
+        <input name="last" id="last" type="text" class="validate" required="" aria-required="true">
+        <label class="active" for="name">Last</label>
+      </section>
+      <section class="input-field inline">
+        <input name="email" id="email" type="email" class="validate" required="" aria-required="true">
+        <label class="active" for="email">Email</label>
+      </section>
+      <section class="input-field inline">
+        <input name="password" id="password" type="password" class="validate" required="" aria-required="true">
+        <label class="active" for="password">Password</label>
+      </section>
+      <section class="">
+        <input type="submit" class="modal-action waves-effect waves-green btn-flat" value="Create Account">
+        <a href="#!" class="modal-action waves-effect modal-close waves-green btn-flat">Cancel</a>
+      </section>
+    </form>
+  </div>
+</div>
