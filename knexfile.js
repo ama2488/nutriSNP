@@ -7,8 +7,8 @@ module.exports = {
     connection: 'postgres://localhost/nutrisnp_dev',
   },
 
-  testing: {
+  production: {
     client: 'pg',
-    connection: 'postgres://localhost/nutrisnp_test',
+    connection: DATABASE_URL,
   },
 };
