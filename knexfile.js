@@ -7,8 +7,12 @@ module.exports = {
     connection: 'postgres://localhost/nutrisnp_dev',
   },
 
+  test: {
+    client: 'pg',
+    connection: 'postgres://localhost/reads_test',
+  },
   production: {
     client: 'pg',
-    connection: process.env.DATABASE_URL,
+    connection: `${process.env.DATABASE_URL}?ssl=true`,
   },
 };
