@@ -33,8 +33,10 @@ function calcMacros(calories, phen) {
 }
 
 function getSNPs(userID) {
-  return knex('user_SNPs')
-  .where('user_id', userID);
+  return knex('user_snps')
+  .join('snps', 'user_snps.snp_id', 'snps.id')
+  .select('*')
+  .where('user_snps.user_id', userID);
 }
 
 function calcPhenotype(snps) {

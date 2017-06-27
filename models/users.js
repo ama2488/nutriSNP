@@ -42,8 +42,6 @@ Users.updateUser = (id, data) => knex('users')
   .where('id', id)
   .update(data);
 
-Users.updateSNPs = (data) => {
-  knex('user_SNPs').insert(data);
-};
+Users.updateSNPs = data => knex('user_snps').insert(data);
 
 module.exports = Users;

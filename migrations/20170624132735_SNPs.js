@@ -1,6 +1,6 @@
 
 exports.up = function (knex, Promise) {
-  return knex.schema.createTable('SNPs', (table) => {
+  return knex.schema.createTable('snps', (table) => {
     table.integer('id');
     table.string('name').notNullable();
     table.string('description').notNullable();

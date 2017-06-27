@@ -6,33 +6,66 @@
   <body>
     <%- include ./partials/navbar %>
       <h1><%= title %></h1>
-      <div class='container'>
-        <form action="/profile" class='authenticate'>
-          <section class="input-field col s12">
-            <input name="age" id="age" type="number" class="validate" required="" aria-required="true" value='21'>
-            <label class="active" for="age">age (years)</label>
-          </section>
-          <section class="input-field col s12">
-            <input name="height" id="height" type="number" class="validate" required="" aria-required="true">
-            <label class="active" for="height">height (inches)</label>
-          </section>
-          <section class="input-field col s12">
-            <input name="weight" id="weight" type="number" class="validate" required="" aria-required="true">
-            <label class="active" for="weight">weight (lbs)</label>
-          </section>
-          <section class="input-field col s12">
-            <select name="gender">
-        <option value="" disabled selected>Gender</option>
-        <option value="0">Male</option>
+      <h5> hello, <%= profile.first%>.</h5>
+      <a href="#edit_profile">
+        edit profile
+      </a>
+      <div id='edit_profile' class='modal'>
+        <div class='container'>
+          <h3> Edit Profile </h3>
+          <form action="/profile/<%=profile.id%>" method='post'>
+            <section class="input-field col s12">
+              <input name="age" id="age" type="number" class="validate" required="" aria-required="true" value='<%= profile.age %>'>
+              <label class="active" for="age">age (years)</label>
+            </section>
+            <section class="input-field col s12">
+              <input name="height" id="height" type="number" class="validate" required="" aria-required="true" value='<%= profile.height %>'>
+              <label class="active" for="height">height (inches)</label>
+            </section>
+            <section class="input-field col s12">
+              <input name="weight" id="weight" type="number" class="validate" required="" aria-required="true" value='<%= profile.weight %>'>
+              <label class="active" for="weight">weight (lbs)</label>
+            </section>
+            <section class="input-field col s12">
+              <select name="gender">
+        <% if (!profile.gender){ %>
+          <option value="" disabled selected>Gender</option>
+          <option value="0">Male</option>
+          <option value="1">Female</option>
+        <% }; %>
+        <% if (profile.gender === 0) { %>
+        <option value="0" selected>Male</option>
         <option value="1">Female</option>
+        <% }; %>
+        <% if (profile.gender === 1) { %>
+          <option value="0">Male</option>
+          <option value="1" selected>Female</option>
+        <% }; %>
       </select>
-          </section>
-          <section class="">
-            <input type="submit" class="waves-effect waves-green btn-flat" value="Save">
-          </section>
-        </form>
+            </section>
+            <section class="">
+              <input type="submit" class="waves-effect waves-green btn-flat" value="Save">
+            </section>
+          </form>
+        </div>
       </div>
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.min.js"></script>
+      <% if(profile.age && profile.gender && profile.height && profile.weight && variants.length > 0) { %>
+        <div class='row'>
+          <div class='col s6'>
+            <h3>Calories: <%= calories %> </h3>
+            <h3>Carbs: <%= macros.carbs %></h3>
+            <h3>Fat: <%= macros.fat %></h3>
+            <h3>Protein:  <%= macros.protein %> <h3>
+      </div>
+      <div class='col s6'>
+        <% variants.forEach((v)=>{ %>
+            <a href='<%=v.description%>'>   <%=v.name%></a>
+            <h5><%=v.variant%></h5>
+            <% }); %>
+          </div>
+        </div>
+        <% }; %>
+          <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.min.js"></script>
   </body>
 
 </html>

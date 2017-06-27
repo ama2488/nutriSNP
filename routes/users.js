@@ -74,9 +74,9 @@ router.get('/receive_code', (req, res) => {
             bearer: retToken,
           },
         }, (err, response, body) => {
-          console.log(err);
           const info = JSON.parse(body);
           const profile = info.data[0].profiles[0].id;
+          req.session.user.TTAM_profile_id = profile;
           users.updateUser(req.session.user.id, { TTAM_profile_id: profile })
           .then(() => {
             res.redirect('/genome');
@@ -87,7 +87,7 @@ router.get('/receive_code', (req, res) => {
   }
 });
 
-router.get('/genome', (req, res, err) => {
+router.get('/genome', (req, res, next) => {
   const profile = req.session.user.TTAM_profile_id;
   request.get(`https://api.23andme.com/3/profile/${profile}/marker/rs4994`, {
     auth: {
@@ -95,8 +95,9 @@ router.get('/genome', (req, res, err) => {
     },
   }, (error, response, bod) => {
     const data = JSON.parse(bod);
-    const variant = data.variants.map(a => (a.allele));
-    users.updateSNPs({ user_id: req.session.user.id, snp_id: 1, variant });
+    const variant = data.variants.map(a => (a.allele)).toString();
+    users.updateSNPs({ user_id: req.session.user.id, snp_id: 1, variant })
+    .catch((err) => { console.log(err); });
   });
   request.get(`https://api.23andme.com/3/profile/${profile}/marker/rs1042713`, {
     auth: {
@@ -104,8 +105,9 @@ router.get('/genome', (req, res, err) => {
     },
   }, (error, response, bod) => {
     const data = JSON.parse(bod);
-    const variant = data.variants.map(a => (a.allele));
-    users.updateSNPs({ user_id: req.session.user.id, snp_id: 2, variant });
+    const variant = data.variants.map(a => (a.allele)).toString();
+    users.updateSNPs({ user_id: req.session.user.id, snp_id: 2, variant })
+    .catch((err) => { console.log(err); });
   });
   request.get(`https://api.23andme.com/3/profile/${profile}/marker/i6010053`, {
     auth: {
@@ -113,8 +115,9 @@ router.get('/genome', (req, res, err) => {
     },
   }, (error, response, bod) => {
     const data = JSON.parse(bod);
-    const variant = data.variants.map(a => (a.allele));
-    users.updateSNPs({ user_id: req.session.user.id, snp_id: 3, variant });
+    const variant = data.variants.map(a => (a.allele)).toString();
+    users.updateSNPs({ user_id: req.session.user.id, snp_id: 3, variant })
+    .catch((err) => { console.log(err); });
   });
   request.get(`https://api.23andme.com/3/profile/${profile}/marker/rs1801282`, {
     auth: {
@@ -122,8 +125,9 @@ router.get('/genome', (req, res, err) => {
     },
   }, (error, response, bod) => {
     const data = JSON.parse(bod);
-    const variant = data.variants.map(a => (a.allele));
-    users.updateSNPs({ user_id: req.session.user.id, snp_id: 4, variant });
+    const variant = data.variants.map(a => (a.allele)).toString();
+    users.updateSNPs({ user_id: req.session.user.id, snp_id: 4, variant })
+    .catch((err) => { console.log(err); });
   });
   request.get(`https://api.23andme.com/3/profile/${profile}/marker/rs1042714`, {
     auth: {
@@ -131,9 +135,11 @@ router.get('/genome', (req, res, err) => {
     },
   }, (error, response, bod) => {
     const data = JSON.parse(bod);
-    const variant = data.variants.map(a => (a.allele));
-    users.updateSNPs({ user_id: req.session.user.id, snp_id: 5, variant });
-    res.redirect('/nutrition/');
+    const variant = data.variants.map(a => (a.allele)).toString();
+    users.updateSNPs({ user_id: req.session.user.id, snp_id: 5, variant }).then(() => {
+      res.redirect('/nutrition/');
+    })
+    .catch((err) => { console.log(err); });
   });
 });
 
