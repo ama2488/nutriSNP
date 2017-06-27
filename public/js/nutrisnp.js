@@ -8,6 +8,9 @@ $(document).ready(() => {
   const fat = ((parseInt($('#fat').html(), 10) * 9) / currCals).toFixed(2);
   const protein = ((parseInt($('#protein').html(), 10) * 4) / currCals).toFixed(2);
 
+  console.log(carb);
+  console.log(fat);
+
   const chart = c3.generate({
     bindto: '#chart',
     data: {
@@ -17,7 +20,6 @@ $(document).ready(() => {
         ['protein', protein],
       ],
       type: 'donut',
-      labels: false,
       onclick(d, i) { console.log('onclick', d, i); },
       onmouseover(d, i) { console.log('onmouseover', d, i); },
       onmouseout(d, i) { console.log('onmouseout', d, i); },

@@ -16,7 +16,7 @@ router.get('/', (req, res, next) => {
   if (req.session.user) {
     res.redirect(`/profile/${req.session.user.id}`);
   } else {
-    res.render('profile', { title: 'nutrition', user: req.session.user });
+    res.redirect('/profile/1');
   }
 });
 
@@ -25,7 +25,6 @@ router.get('/:id', (req, res, next) => {
   ntr.getSNPs(user).then((variants) => {
     const phen = ntr.calcPhenotype(variants);
     const v = variants;
-    console.log(phen);
     ntr.getUser(user).then((profile) => {
       const calories = ntr.calcCalories(profile);
       const userProfile = profile;

@@ -44,4 +44,12 @@ Users.updateUser = (id, data) => knex('users')
 
 Users.updateSNPs = data => knex('user_snps').insert(data);
 
+// Users.updateLinks = (id, data) => knex('snps')
+// console.log(data)
+//   .del()
+//   .then(() => {
+//     knex('snps').insert(data);
+//   }).catch((err) => {
+//     console.log(err);
+//   });
 module.exports = Users;

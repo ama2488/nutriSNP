@@ -76,8 +76,8 @@ router.get('/receive_code', (req, res) => {
         }, (err, response, body) => {
           const info = JSON.parse(body);
           const profile = info.data[0].profiles[0].id;
-          req.session.user.TTAM_profile_id = profile;
-          users.updateUser(req.session.user.id, { TTAM_profile_id: profile })
+          req.session.user.ttam_profile_id = profile;
+          users.updateUser(req.session.user.id, { ttam_profile_id: profile })
           .then(() => {
             res.redirect('/genome');
           });
@@ -88,7 +88,7 @@ router.get('/receive_code', (req, res) => {
 });
 
 router.get('/genome', (req, res, next) => {
-  const profile = req.session.user.TTAM_profile_id;
+  const profile = req.session.user.ttam_profile_id;
   request.get(`https://api.23andme.com/3/profile/${profile}/marker/rs4994`, {
     auth: {
       bearer: req.session.token,

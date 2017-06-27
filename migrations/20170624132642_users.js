@@ -11,8 +11,9 @@ exports.up = function (knex, Promise) {
     table.float('weight');
     table.integer('gender');
     table.float('activity_level');
-    table.string('TTAM_profile_id');
+    table.string('ttam_profile_id');
     table.boolean('is_admin');
+    table.boolean('is_dummy');
     table.timestamps(true, true);
   });
 };

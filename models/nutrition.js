@@ -12,7 +12,7 @@ function getActivities() {
 
 function calcCalories(user) {
   let calories;
-  if (user.gender === 0) {
+  if (user.gender === 2) {
     calories = ((((10 * user.weight) + (6.25 * user.height))
       - (5 * user.age)) + 5) * user.activity_level;
     return Math.round(calories, 2);

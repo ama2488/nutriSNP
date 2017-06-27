@@ -18,15 +18,15 @@
         <select name="gender">
   <% if (!profile.gender){ %>
     <option value="" disabled selected>Gender</option>
-    <option value="0">Male</option>
+    <option value="2">Male</option>
     <option value="1">Female</option>
   <% }; %>
-  <% if (profile.gender === 0) { %>
-  <option value="0" selected>Male</option>
+  <% if (profile.gender === 2) { %>
+  <option value="2" selected>Male</option>
   <option value="1">Female</option>
   <% }; %>
   <% if (profile.gender === 1) { %>
-    <option value="0">Male</option>
+    <option value="2">Male</option>
     <option value="1" selected>Female</option>
   <% }; %>
 </select>
