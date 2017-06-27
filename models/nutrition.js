@@ -6,15 +6,19 @@ function getUser(userID) {
     .first();
 }
 
+function getActivities() {
+  return knex('activity_levels');
+}
+
 function calcCalories(user) {
   let calories;
   if (user.gender === 0) {
     calories = ((((10 * user.weight) + (6.25 * user.height))
-      - (5 * user.age)) + 5);
+      - (5 * user.age)) + 5) * user.activity_level;
     return Math.round(calories, 2);
   }
   calories = (((10 * user.weight) + (6.25 * user.height))
-    - (5 * user.age) - 161);
+    - (5 * user.age) - 161) * user.activity_level;
   return Math.round(calories, 2);
 }
 
@@ -97,4 +101,5 @@ module.exports = {
   getMacros,
   getUser,
   calculateMacros,
+  getActivities,
 };

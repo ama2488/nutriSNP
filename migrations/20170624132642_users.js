@@ -12,6 +12,7 @@ exports.up = function (knex, Promise) {
     table.integer('gender');
     table.float('activity_level');
     table.string('TTAM_profile_id');
+    table.boolean('is_admin');
     table.timestamps(true, true);
   });
 };

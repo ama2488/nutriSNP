@@ -137,7 +137,7 @@ router.get('/genome', (req, res, next) => {
     const data = JSON.parse(bod);
     const variant = data.variants.map(a => (a.allele)).toString();
     users.updateSNPs({ user_id: req.session.user.id, snp_id: 5, variant }).then(() => {
-      res.redirect('/nutrition/');
+      res.redirect('/profile/');
     })
     .catch((err) => { console.log(err); });
   });

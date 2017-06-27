@@ -32,7 +32,15 @@ router.get('/:id', (req, res, next) => {
       ntr.getMacros(phen)
       .then((phenotype) => {
         const macros = ntr.calcMacros(calories, phenotype[0]);
-        res.render('profile', { title: 'profile', macros, profile: userProfile, user: req.session.user, calories, variants: v });
+        ntr.getActivities().then((activityLevels) => {
+          res.render('profile', { title: 'profile',
+            macros,
+            profile: userProfile,
+            user: req.session.user,
+            calories,
+            variants: v,
+            activityLevels });
+        });
       });
     });
   })

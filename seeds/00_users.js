@@ -12,8 +12,9 @@ exports.seed = function (knex, Promise) {
          height: 163,
          weight: 122,
          gender: 1,
-         password: 'hello',
+         password: '$2a$12$87AuDrCGiFSWdDyyYicrFuSSbfsY.Ug784GegZzLdaXG.zlOonrku',
          activity_level: 1.2,
+         is_admin: true,
        },
      ]));
 };

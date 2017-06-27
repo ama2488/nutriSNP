@@ -5,67 +5,49 @@
 
   <body>
     <%- include ./partials/navbar %>
-      <h1><%= title %></h1>
-      <h5> hello, <%= profile.first%>.</h5>
-      <a href="#edit_profile">
-        edit profile
-      </a>
-      <div id='edit_profile' class='modal'>
-        <div class='container'>
-          <h3> Edit Profile </h3>
-          <form action="/profile/<%=profile.id%>" method='post'>
-            <section class="input-field col s12">
-              <input name="age" id="age" type="number" class="validate" required="" aria-required="true" value='<%= profile.age %>'>
-              <label class="active" for="age">age (years)</label>
-            </section>
-            <section class="input-field col s12">
-              <input name="height" id="height" type="number" class="validate" required="" aria-required="true" value='<%= profile.height %>'>
-              <label class="active" for="height">height (inches)</label>
-            </section>
-            <section class="input-field col s12">
-              <input name="weight" id="weight" type="number" class="validate" required="" aria-required="true" value='<%= profile.weight %>'>
-              <label class="active" for="weight">weight (lbs)</label>
-            </section>
-            <section class="input-field col s12">
-              <select name="gender">
-        <% if (!profile.gender){ %>
-          <option value="" disabled selected>Gender</option>
-          <option value="0">Male</option>
-          <option value="1">Female</option>
-        <% }; %>
-        <% if (profile.gender === 0) { %>
-        <option value="0" selected>Male</option>
-        <option value="1">Female</option>
-        <% }; %>
-        <% if (profile.gender === 1) { %>
-          <option value="0">Male</option>
-          <option value="1" selected>Female</option>
-        <% }; %>
-      </select>
-            </section>
-            <section class="">
-              <input type="submit" class="waves-effect waves-green btn-flat" value="Save">
-            </section>
-          </form>
-        </div>
-      </div>
-      <% if(profile.age && profile.gender && profile.height && profile.weight && variants.length > 0) { %>
-        <div class='row'>
-          <div class='col s6'>
-            <h3>Calories: <%= calories %> </h3>
-            <h3>Carbs: <%= macros.carbs %></h3>
-            <h3>Fat: <%= macros.fat %></h3>
-            <h3>Protein:  <%= macros.protein %> <h3>
-      </div>
-      <div class='col s6'>
-        <% variants.forEach((v)=>{ %>
-            <a href='<%=v.description%>'>   <%=v.name%></a>
-            <h5><%=v.variant%></h5>
-            <% }); %>
+      <div class='container'>
+        <h1 class='center'><%= title %></h1>
+        <h5> hello, <%= profile.first%>.</h5>
+        <a href="#edit_profile">
+      edit profile
+    </a>
+        <%- include ./partials/editprofile %>
+          <% if(profile.age && profile.gender && profile.height && profile.weight && variants.length > 0) { %>
+            <div class='row'>
+              <div class='col s6'>
+                <h3>Calories: <span id='calories'><%= calories %> </span></h3>
+                <h3>Carbs: <span id='carb'><%= macros.carbs %></span></h3>
+                <h3>Fat: <span id='fat'><%= macros.fat %></span></h3>
+                <h3>Protein:<span id='protein'>  <%= macros.protein %></span> <h3>
+
+          </div>
+          <div class = 'col s6'>
+          <div id='chart' height='300px' width = '100%'></div>
           </div>
         </div>
-        <% }; %>
-          <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.99.0/js/materialize.min.js"></script>
+        <div class='col s12'>
+          <form action="#">
+            <p class="range-field">
+              <input type="range" id="goals" min="-2" max="2" />
+            </p>
+          </form>
+          <h3 class='center'> Your Genotype </h3>
+                <% variants.forEach((v)=>{ %>
+                  <a href='<%=v.description%>'>
+                    <%=v.name%>
+                  </a>
+                  <h5><%=v.variant%></h5>
+                  <% }); %>
+              </div>
+              <% } else { %>
+                <h5> please complete your profile and authorize 23andMe to complete your profile </h5>
+                <% }; %>
+                  <% if (user) { %>
+                    <% if (!user.TTAM_profile_id) { %>
+                      <a href="/auth">Authorize 23andMe</a>
+                      <% }; %>
+                        <% }; %>
+            </div>
   </body>
 
 </html>
