@@ -22,13 +22,17 @@ router.get('/', (req, res, next) => {
 
 router.get('/:id', (req, res, next) => {
   const user = parseInt(req.params.id, 10);
-  ntr.getSNPs(user).then((variants) => {
-    const phen = ntr.calcPhenotype(variants);
-    const v = variants;
-    ntr.getUser(user).then((profile) => {
-      const calories = ntr.calcCalories(profile);
-      const userProfile = profile;
-      ntr.getMacros(phen)
+  if (req.session.user.id !== user && user !== 1) {
+    const error = new Error('Not Authorized.');
+    next(error);
+  } else {
+    ntr.getSNPs(user).then((variants) => {
+      const phen = ntr.calcPhenotype(variants);
+      const v = variants;
+      ntr.getUser(user).then((profile) => {
+        const calories = ntr.calcCalories(profile);
+        const userProfile = profile;
+        ntr.getMacros(phen)
       .then((phenotype) => {
         const macros = ntr.calcMacros(calories, phenotype[0]);
         ntr.getActivities().then((activityLevels) => {
@@ -41,11 +45,12 @@ router.get('/:id', (req, res, next) => {
             activityLevels });
         });
       });
-    });
-  })
+      });
+    })
   .catch((err) => {
     console.log(err);
   });
+  }
 });
 
 router.post('/:id', (req, res, next) => {

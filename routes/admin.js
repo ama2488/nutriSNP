@@ -12,15 +12,20 @@ app.use(parser.json());
 app.use(parser.urlencoded({ extended: false }));
 
 router.post('/admin/snp', (req, res, next) => {
-  const data = req.body;
-  console.log(data);
-  // users.updateLinks(data)
-  // .then(() => {
-  res.status(201);
-  res.redirect(`/profile/${req.session.user.id}`);
-  // }).catch((err) => {
-  //   console.log(err);
-  // });
+  if (!req.session.user.is_admin) {
+    const error = new Error('Not authorized.');
+    next(error);
+  } else {
+    const data = { description: req.body.description };
+    const id = parseInt(req.body.id, 10);
+    users.updateLinks(id, data)
+  .then(() => {
+    res.status(201);
+    res.redirect(`/profile/${req.session.user.id}`);
+  }).catch((err) => {
+    console.log(err);
+  });
+  }
 });
 
 module.exports = router;

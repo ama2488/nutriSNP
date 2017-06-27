@@ -40,7 +40,8 @@ function getSNPs(userID) {
   return knex('user_snps')
   .join('snps', 'user_snps.snp_id', 'snps.id')
   .select('*')
-  .where('user_snps.user_id', userID);
+  .where('user_snps.user_id', userID)
+  .orderBy('snps.id');
 }
 
 function calcPhenotype(snps) {

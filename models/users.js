@@ -19,6 +19,9 @@ Users.createUser = (data, callback) => {
       data.password = hash;
       Users().insert(data, '*').then((result) => {
         callback(undefined, result);
+      })
+      .catch((error) => {
+        callback(error);
       });
     });
   });
@@ -39,17 +42,13 @@ Users.authenticateUser = (email, password, callback) => {
 };
 
 Users.updateUser = (id, data) => knex('users')
-  .where('id', id)
-  .update(data);
+.where('id', id)
+.update(data);
 
 Users.updateSNPs = data => knex('user_snps').insert(data);
 
-// Users.updateLinks = (id, data) => knex('snps')
-// console.log(data)
-//   .del()
-//   .then(() => {
-//     knex('snps').insert(data);
-//   }).catch((err) => {
-//     console.log(err);
-//   });
+Users.updateLinks = (id, data) => knex('snps')
+.where('id', id)
+.update(data);
+
 module.exports = Users;

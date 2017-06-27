@@ -29,8 +29,8 @@ app.use(session({ keys: ['dskjf0qi340oij2k3j93387dlk@#$', '@#$WFEW#$CFDSdsfdsdlk
 
 app.use('/', index);
 app.use(users);
-app.use(admin);
 app.use('/profile', profile);
+app.use(admin);
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

@@ -1,23 +1,24 @@
 <div id='edit_snp' class='modal'>
   <div class='container'>
     <h3> Edit SNP Info </h3>
-    <form action="/admin/snp" method='post'>
-      <% variants.forEach((v)=>{ %>
-        <section class="input-field col s12">
-          <input name="id" type="text" class="validate" required="" aria-required="true" value='<%=v.id%>' hidden>
-        </section>
-        <section class="input-field col s12">
-          <input name="title" ype="text" class="validate" required="" aria-required="true" value='<%=v.name%>' hidden>
-        </section>
-        <section class="input-field col s12">
-          <input name="description" id="<%=v.id%>" type="text" class="validate" required="" aria-required="true" value='<%= v.description %>'>
-          <label class="active" for="<%=v.id%>"><%=v.name%></label>
-        </section>
-        <% }); %>
-          <section class="">
-            <input type="submit" class="waves-effect waves-green btn-flat" value="Save">
-            <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+    <% variants.forEach((v)=>{ %>
+      <form action="/admin/snp" method='post'>
+        <div class='row'>
+          <section class="input-field inline col s10">
+            <input name="id" type="text" class="validate" required="" aria-required="true" value='<%=v.id%>' hidden>
+            <input name="title" ype="text" class="validate" required="" aria-required="true" value='<%=v.name%>' hidden>
+            <input name="description" id="<%=v.id%>" type="text" class="validate" required="" aria-required="true" value='<%= v.description %>'>
+            <label class="active" for="<%=v.id%>"><%=v.name%></label>
           </section>
-    </form>
+          <section class="inline col s2 align-left">
+            <input type="submit" class="waves-effect waves-green btn-flat" value="Save">
+          </section>
+        </div>
+      </form>
+      <% }); %>
+        <section>
+          <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
+        </section>
+
   </div>
 </div>
