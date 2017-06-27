@@ -12,16 +12,16 @@ Users.createUser = (data, callback) => {
     if (err) {
       callback(err);
     }
-    bcrypt.hash(data.password, salt, (err, hash) => {
-      if (err) {
+    bcrypt.hash(data.password, salt, (error, hash) => {
+      if (error) {
         callback(err);
       }
       data.password = hash;
       Users().insert(data, '*').then((result) => {
         callback(undefined, result);
       })
-      .catch((error) => {
-        callback(error);
+      .catch((er) => {
+        callback(er);
       });
     });
   });
