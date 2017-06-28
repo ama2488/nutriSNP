@@ -9,6 +9,7 @@ const app = express();
 app.use(parser.json());
 app.use(parser.urlencoded({ extended: false }));
 
+const callback = process.env.NODE_ENV === 'production' ? 'https://nutrisnp.herokuapp.com/receive_code/' : 'http://localhost:3000/receive_code/';
 // **********23ANDME OAUTH2************
 const credentials = {
   client: {
@@ -24,7 +25,7 @@ const credentials = {
 const oauth2 = require('simple-oauth2').create(credentials);
 
 const authorization_uri = oauth2.authorizationCode.authorizeURL({
-  redirect_uri: 'http://localhost:3000/receive_code/',
+  redirect_uri: callback,
   scope: 'basic names email genomes',
   state: 'jenvuece2a',
 });
@@ -42,7 +43,7 @@ router.get('/receive_code', (req, res) => {
 
     oauth2.authorizationCode.getToken({
       code,
-      redirect_uri: 'http://localhost:3000/receive_code/',
+      redirect_uri: callback,
     }, saveToken);
 
     function saveToken(error, result) {
