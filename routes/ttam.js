@@ -9,9 +9,6 @@ const app = express();
 app.use(parser.json());
 app.use(parser.urlencoded({ extended: false }));
 
-console.log('Environment:');
-console.log(process.env);
-
 // **********23ANDME OAUTH2************
 const credentials = {
   client: {
