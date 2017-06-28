@@ -30,3 +30,5 @@ npm-debug.log
 .env
 /config
 /node_modules
+
+node_modules
