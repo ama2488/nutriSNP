@@ -8,9 +8,6 @@ $(document).ready(() => {
   const fat = ((parseInt($('#fat').html(), 10) * 9) / currCals).toFixed(2);
   const protein = ((parseInt($('#protein').html(), 10) * 4) / currCals).toFixed(2);
 
-  console.log(carb);
-  console.log(fat);
-
   const chart = c3.generate({
     bindto: '#chart',
     data: {
@@ -32,6 +29,24 @@ $(document).ready(() => {
     },
   });
 
+  function authenticateUser(e) {
+    e.preventDefault();
+    const formData = $(e.target).serialize();
+    $.ajax({
+      url: e.target.getAttribute('action'),
+      type: 'POST',
+      data: formData,
+      contentType: 'application/x-www-form-urlencoded',
+      processData: false,
+      success(result) {
+        window.location.replace('/profile/');
+      },
+      error(err) {
+        Materialize.toast(err.responseText, 3000, 'rounded');
+      },
+    });
+  }
+
   function updateMacros(event) {
     const goal = event.target.value;
     const newCals = parseInt(currCals, 10) + (parseInt(goal, 10) * 500);
@@ -45,4 +60,5 @@ $(document).ready(() => {
   }
 
   $('#goals').on('change', (e) => { updateMacros(e); });
+  $('.authenticate').on('submit', (e) => { authenticateUser(e); });
 });

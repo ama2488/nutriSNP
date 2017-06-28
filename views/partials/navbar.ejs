@@ -38,7 +38,7 @@
 <div id="sign_in" class="modal">
   <div class="modal-content">
     <h4>Sign In</h4>
-    <form action="/signin" method='post'>
+    <form action="/signin" class='authenticate'>
       <section class="input-field inline">
         <input name="email" id="email" type="email" class="validate" required="" aria-required="true">
         <label class="active" for="email">Email</label>
@@ -48,6 +48,7 @@
         <label class="active" for="password">Password</label>
       </section>
       <section class="">
+        <a href="/auth/facebook">Login with Facebook</a>
         <input type="submit" class="modal-action waves-effect waves-green btn-flat" value="Sign In">
         <a href="#sign_up" class="modal-action modal-close waves-effect waves-green btn-flat">Create Account</a>
         <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
@@ -69,7 +70,7 @@
 <div id="sign_up" class="modal">
   <div class="modal-content">
     <h4>Sign Up!</h4>
-    <form action="/signup" method="post">
+    <form action="/signup" class='authenticate'>
       <section class="input-field inline">
         <input name="first" id="first" type="text" class="validate" required="" aria-required="true">
         <label class="active" for="name">First</label>

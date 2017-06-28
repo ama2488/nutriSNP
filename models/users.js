@@ -8,21 +8,21 @@ function Users() {
 }
 
 Users.createUser = (data, callback) => {
-  bcrypt.genSalt(SALT_WORK_FACTOR, (err, salt) => {
-    if (err) {
-      callback(err);
+  bcrypt.genSalt(SALT_WORK_FACTOR, (e, salt) => {
+    if (e) {
+      callback(e);
     }
     bcrypt.hash(data.password, salt, (error, hash) => {
       if (error) {
-        callback(err);
+        callback(error);
       }
       data.password = hash;
       Users().insert(data, '*').then((result) => {
         callback(undefined, result);
       })
-      .catch((er) => {
-        callback(er);
-      });
+          .catch((err) => {
+            callback(err);
+          });
     });
   });
 };
@@ -34,7 +34,7 @@ Users.authenticateUser = (email, password, callback) => {
     }
     bcrypt.compare(password, user.password, (err, isMatch) => {
       if (err || !isMatch) {
-        return callback("Username and password don't match");
+        return callback('Username and password don\'t match');
       }
       return callback(undefined, user);
     });
@@ -42,13 +42,14 @@ Users.authenticateUser = (email, password, callback) => {
 };
 
 Users.updateUser = (id, data) => knex('users')
-.where('id', id)
-.update(data);
+  .where('id', id)
+  .update(data);
 
 Users.updateSNPs = data => knex('user_snps').insert(data);
 
 Users.updateLinks = (id, data) => knex('snps')
-.where('id', id)
-.update(data);
+  .where('id', id)
+  .update(data);
+
 
 module.exports = Users;

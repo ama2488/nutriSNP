@@ -45,6 +45,9 @@ function getSNPs(userID) {
 }
 
 function calcPhenotype(snps) {
+  if (snps.length === 0) {
+    return 3;
+  }
   const variants = {};
   snps.forEach((snp) => { variants[snp.snp_id] = snp.variant; });
 

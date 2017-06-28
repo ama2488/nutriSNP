@@ -1,0 +1,19 @@
+<div class='row'>
+  <div class='col s6'>
+    <h3>Calories: <span id='calories'><%= calories %> </span></h3>
+    <h3>Carbs: <span id='carb'><%= macros.carbs %></span></h3>
+    <h3>Fat: <span id='fat'><%= macros.fat %></span></h3>
+    <h3>Protein: <span id='protein'>  <%= macros.protein %></span> <h3>
+
+</div>
+<div class = 'col s6'>
+<div id='chart' height='300px' width = '100%'></div>
+</div>
+</div>
+<div class='col s12'>
+<form action="#">
+<p class="range-field">
+  <input type="range" id="goals" min="-2" max="2" />
+  <label for="goals">slide to adjust goal to desired weekly weight gain/loss.</label>
+</p>
+</form>
