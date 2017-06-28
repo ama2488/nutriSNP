@@ -20,6 +20,7 @@ passport.use(new FacebookStrategy({
   callbackURL: 'http://localhost:3000/auth/facebook/callback',
 },
 (accessToken, refreshToken, prof, done) => {
+  return users.createUser({});
   process.nextTick(() => done(null, prof));
 }));
 

@@ -10,7 +10,17 @@ app.use(parser.json());
 app.use(parser.urlencoded({ extended: false }));
 
 // **********23ANDME OAUTH2************
-const credentials = require('../config/creds');
+const credentials = {
+  client: {
+    id: '1e740220bb911b3b2b0788ac89fe366c',
+    secret: process.env.TTAM_SECRET,
+  },
+  auth: {
+    tokenHost: 'https://api.23andme.com',
+    tokenPath: '/token',
+    authorizePath: '/authorize',
+  },
+};
 const oauth2 = require('simple-oauth2').create(credentials);
 
 const authorization_uri = oauth2.authorizationCode.authorizeURL({
