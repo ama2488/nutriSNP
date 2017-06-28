@@ -4,7 +4,7 @@ exports.up = function (knex, Promise) {
     table.increments();
     table.string('first').notNullable();
     table.string('last').notNullable();
-    table.string('email').notNullable();
+    table.string('email').notNullable().unique();
     table.string('password').notNullable();
     table.integer('age');
     table.float('height');
@@ -13,7 +13,6 @@ exports.up = function (knex, Promise) {
     table.float('activity_level');
     table.string('ttam_profile_id');
     table.string('fbid');
-    table.string('fb_token');
     table.boolean('is_admin');
     table.boolean('is_dummy');
     table.timestamps(true, true);

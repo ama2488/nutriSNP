@@ -26,22 +26,64 @@ describe('routes : users', () => {
   });
 
   afterEach((done) => {
-    done();
+    knex.migrate.rollback()
+    .then(() => {
+      done();
+    })
+    .catch((err) => {
+      done(err);
+    });
   });
 
   describe('POST /signup', () => {
-    it('should create user account and respond with 201', (done) => {
+    it('should create user account and respond with 200', (done) => {
       chai.request(server)
       .post('/signup')
       .send({
         first: 'Amanda',
         last: 'Allen',
-        email: 'Amanda@amanda.com',
+        email: 'amanda@amanda.com',
         password: 'hellothere',
       })
       .end((err, res) => {
         res.redirects.length.should.equal(1);
         res.status.should.equal(200);
+        done();
+      });
+    });
+  });
+
+  describe('POST /signup existing email', () => {
+    it('should respond with 400', (done) => {
+      chai.request(server)
+      .post('/signup')
+      .send({
+        first: 'Amanda',
+        last: 'Allen',
+        email: 'amanda@dev.am',
+        password: 'hellothere',
+      })
+      .end((err, res) => {
+        res.redirects.length.should.equal(0);
+        res.status.should.equal(400);
+        done();
+      });
+    });
+  });
+
+  describe('POST /signup password fewer than 6 characters', () => {
+    it('should respond with 400', (done) => {
+      chai.request(server)
+      .post('/signup')
+      .send({
+        first: 'Amanda',
+        last: 'Allen',
+        email: 'amanda@dev.am',
+        password: 'hi',
+      })
+      .end((err, res) => {
+        res.redirects.length.should.equal(0);
+        res.status.should.equal(400);
         done();
       });
     });

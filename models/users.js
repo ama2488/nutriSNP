@@ -8,20 +8,29 @@ function Users() {
 }
 
 Users.createUser = (data, callback) => {
-  bcrypt.genSalt(SALT_WORK_FACTOR, (e, salt) => {
-    if (e) {
-      callback(e);
+  if (data.password.length < 6) {
+    return callback('Password must be at least 6 characters.');
+  }
+  Users().where('email', data.email).first().then((account) => {
+    if (account) {
+      return callback('An account with this email already exists.');
     }
-    bcrypt.hash(data.password, salt, (error, hash) => {
-      if (error) {
-        callback(error);
+    bcrypt.genSalt(SALT_WORK_FACTOR, (e, salt) => {
+      if (e) {
+        callback(e);
       }
-      data.password = hash;
-      Users().insert(data, '*').then((result) => {
-        callback(undefined, result);
-      })
-      .catch((err) => {
-        callback(err);
+      bcrypt.hash(data.password, salt, (error, hash) => {
+        if (error) {
+          callback(error);
+        }
+        data.password = hash;
+        Users().insert(data, '*').then((result) => {
+          callback(undefined, result);
+        })
+          .catch((err) => {
+            console.log(err);
+            callback(err);
+          });
       });
     });
   });

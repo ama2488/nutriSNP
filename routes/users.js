@@ -28,9 +28,14 @@ router.post('/signup', (req, res, next) => {
       res.status(400);
       res.send(err.message);
     } else {
-      users.createUser(req.body, (err, data) => {
-        req.session.user = data[0];
-        res.redirect('/');
+      users.createUser(req.body, (error, data) => {
+        if (error) {
+          res.status(400);
+          res.send(error);
+        } else {
+          req.session.user = data[0];
+          res.redirect('/');
+        }
       });
     }
   });
