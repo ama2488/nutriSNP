@@ -6,10 +6,9 @@ module.exports = {
     client: 'pg',
     connection: 'postgres://localhost/nutrisnp_dev',
   },
-
   test: {
     client: 'pg',
-    connection: 'postgres://localhost/reads_test',
+    connection: 'postgres://localhost/nutrisnp_test',
   },
   production: {
     client: 'pg',

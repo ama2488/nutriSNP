@@ -32,23 +32,23 @@ app.use(session({ keys: ['dskjf0qi340oij2k3j93387dlk@#$', '@#$WFEW#$CFDSdsfdsdlk
 app.use(passport.initialize());
 app.use(passport.session());
 
-// passport.serializeUser((user, done) => {
-//   done(null, user);
-// });
-//
-// passport.deserializeUser((obj, done) => {
-//   done(obj, null);
-// });
-//
-//
-// passport.use(new FacebookStrategy({
-//   clientID: process.env.FACEBOOK_APP_ID,
-//   clientSecret: process.env.FACEBOOK_APP_SECRET,
-//   callbackURL: 'http://localhost:3000/auth/facebook/callback',
-// },
-// (accessToken, refreshToken, prof, done) => {
-//   process.nextTick(() => done(null, prof));
-// }));
+passport.serializeUser((user, done) => {
+  done(null, user);
+});
+
+passport.deserializeUser((obj, done) => {
+  done(obj, null);
+});
+
+
+passport.use(new FacebookStrategy({
+  clientID: process.env.FACEBOOK_APP_ID,
+  clientSecret: process.env.FACEBOOK_APP_SECRET,
+  callbackURL: 'http://localhost:3000/auth/facebook/callback',
+},
+(accessToken, refreshToken, prof, done) => {
+  process.nextTick(() => done(null, prof));
+}));
 
 app.use('/', index);
 app.use(users);
@@ -56,15 +56,15 @@ app.use(ttam);
 app.use('/profile', profile);
 app.use(admin);
 
-// app.get('/auth/facebook',
-//     passport.authenticate('facebook'),
-//     (req, res) => {});
-// app.get('/auth/facebook/callback',
-//     passport.authenticate('facebook', { failureRedirect: '/' }),
-//     (req, res) => {
-//       console.log(req.body);
-//       res.redirect('/profile');
-//     });
+app.get('/auth/facebook',
+    passport.authenticate('facebook'),
+    (req, res) => {});
+app.get('/auth/facebook/callback',
+    passport.authenticate('facebook', { failureRedirect: '/' }),
+    (req, res) => {
+      console.log(req.body);
+      res.redirect('/profile');
+    });
 
 // catch 404 and forward to error handler
 app.use((req, res, next) => {

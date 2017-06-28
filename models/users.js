@@ -20,10 +20,19 @@ Users.createUser = (data, callback) => {
       Users().insert(data, '*').then((result) => {
         callback(undefined, result);
       })
-          .catch((err) => {
-            callback(err);
-          });
+      .catch((err) => {
+        callback(err);
+      });
     });
+  });
+};
+
+Users.createFbUser = (data, callback) => {
+  Users().insert(data, '*').then((result) => {
+    callback(undefined, result);
+  })
+  .catch((err) => {
+    callback(err);
   });
 };
 
@@ -42,14 +51,14 @@ Users.authenticateUser = (email, password, callback) => {
 };
 
 Users.updateUser = (id, data) => knex('users')
-  .where('id', id)
-  .update(data);
+.where('id', id)
+.update(data);
 
 Users.updateSNPs = data => knex('user_snps').insert(data);
 
 Users.updateLinks = (id, data) => knex('snps')
-  .where('id', id)
-  .update(data);
+.where('id', id)
+.update(data);
 
 
 module.exports = Users;

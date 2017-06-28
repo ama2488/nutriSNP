@@ -12,6 +12,8 @@ exports.up = function (knex, Promise) {
     table.integer('gender');
     table.float('activity_level');
     table.string('ttam_profile_id');
+    table.string('fbid');
+    table.string('fb_token');
     table.boolean('is_admin');
     table.boolean('is_dummy');
     table.timestamps(true, true);
