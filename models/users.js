@@ -27,21 +27,36 @@ Users.createUser = (data, callback) => {
         Users().insert(data, '*').then((result) => {
           callback(undefined, result);
         })
-          .catch((err) => {
-            console.log(err);
-            callback(err);
-          });
+        .catch((err) => {
+          console.log(err);
+          callback(err);
+        });
       });
     });
   });
 };
 
 Users.createFbUser = (data, callback) => {
-  Users().insert(data, '*').then((result) => {
-    callback(undefined, result);
-  })
-  .catch((err) => {
-    callback(err);
+  Users().where('fbid', data.id).first().then((account) => {
+    if (account) {
+      console.log('account:', account);
+      return callback(undefined, account);
+    }
+    Users().insert({ fbid: data.id,
+      first: data.name.givenName,
+      last: data.name.familyName,
+      email: 'xxx@xxx.com',
+      password: 'xxxxxxxx',
+      is_admin: false })
+      .returning('*').first()
+      .then((result) => {
+        console.log('res:', result);
+        callback(undefined, result);
+      })
+      .catch((err) => {
+        console.log(err);
+        callback(err);
+      });
   });
 };
 
@@ -59,15 +74,10 @@ Users.authenticateUser = (email, password, callback) => {
   });
 };
 
-Users.updateUser = (id, data) => knex('users')
-.where('id', id)
-.update(data);
-
 Users.updateSNPs = data => knex('user_snps').insert(data);
-
-Users.updateLinks = (id, data) => knex('snps')
-.where('id', id)
-.update(data);
+Users.addSNP = data => knex('snps').insert(data);
+Users.deleteItem = (id, table) => knex(table).where('id', id).del();
+Users.updateItem = (id, data, table) => knex(table).where('id', id).update(data);
 
 
 module.exports = Users;

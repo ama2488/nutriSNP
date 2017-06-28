@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const session = require('cookie-session');
 const passport = require('passport');
 const FacebookStrategy = require('passport-facebook').Strategy;
+const user = require('./models/users');
 require('dotenv').config();
 
 const index = require('./routes/index');
@@ -29,11 +30,18 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(session({ keys: ['dskjf0qi340oij2k3j93387dlk@#$', '@#$WFEW#$CFDSdsfdsdlkajhi'] }));
+
+app.use('/', index);
+app.use(users);
+app.use(ttam);
+app.use('/profile', profile);
+app.use('/admin', admin);
+
 app.use(passport.initialize());
 app.use(passport.session());
 
-passport.serializeUser((user, done) => {
-  done(null, user);
+passport.serializeUser((u, done) => {
+  done(null, u);
 });
 
 passport.deserializeUser((obj, done) => {
@@ -45,25 +53,28 @@ passport.use(new FacebookStrategy({
   clientID: process.env.FACEBOOK_APP_ID,
   clientSecret: process.env.FACEBOOK_APP_SECRET,
   callbackURL: 'http://localhost:3000/auth/facebook/callback',
+  profileFields: ['id', 'displayName', 'email', 'name'],
 },
 (accessToken, refreshToken, prof, done) => {
   process.nextTick(() => done(null, prof));
 }));
 
-app.use('/', index);
-app.use(users);
-app.use(ttam);
-app.use('/profile', profile);
-app.use(admin);
 
 app.get('/auth/facebook',
     passport.authenticate('facebook'),
     (req, res) => {});
 app.get('/auth/facebook/callback',
-    passport.authenticate('facebook', { failureRedirect: '/' }),
+    passport.authenticate('facebook', { failureRedirect: '/', scope: 'email' }),
     (req, res) => {
-      console.log(req.body);
-      res.redirect('/profile');
+      user.createFbUser(req.user, (err, result) => {
+        console.log('result:', result);
+        if (err) {
+          console.log('error', err);
+        } else {
+          req.session.user = result;
+          res.redirect('/profile');
+        }
+      });
     });
 
 // catch 404 and forward to error handler

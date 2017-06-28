@@ -61,7 +61,7 @@ router.get('/receive_code', (req, res) => {
           const info = JSON.parse(body);
           const profile = info.data[0].profiles[0].id;
           req.session.user.ttam_profile_id = profile;
-          users.updateUser(req.session.user.id, { ttam_profile_id: profile })
+          users.updateItem(req.session.user.id, { ttam_profile_id: profile }, 'users')
           .then(() => {
             res.redirect('/genome');
           });

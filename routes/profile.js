@@ -37,15 +37,23 @@ router.get('/:id', (req, res, next) => {
       ntr.getMacros(phen)
       .then((phenotype) => {
         const macros = ntr.calcMacros(calories, phenotype[0]);
-        ntr.getActivities().then((activityLevels) => {
-          res.render('profile', { title: 'profile',
-            macros,
-            profile: userProfile,
-            user: req.session.user,
-            calories,
-            variants: v,
-            activityLevels,
-            phenotype: phenotype[0] });
+        ntr.getMacros().then((allPhenotypes) => {
+          const p = allPhenotypes;
+          ntr.getAllSNPs().then((allSNPs) => {
+            const s = allSNPs;
+            ntr.getActivities().then((activityLevels) => {
+              res.render('profile', { title: 'profile',
+                macros,
+                profile: userProfile,
+                user: req.session.user,
+                calories,
+                variants: v,
+                activityLevels,
+                phenotype: phenotype[0],
+                phenotypes: p,
+                snps: s });
+            });
+          });
         });
       });
     });
@@ -58,7 +66,7 @@ router.get('/:id', (req, res, next) => {
 router.post('/:id', (req, res, next) => {
   const user = parseInt(req.params.id, 10);
   const data = req.body;
-  users.updateUser(user, data)
+  users.updateItem(user, data, 'users')
   .then(() => {
     res.redirect('/profile');
   });

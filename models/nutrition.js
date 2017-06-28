@@ -10,6 +10,11 @@ function getActivities() {
   return knex('activity_levels');
 }
 
+function getAllSNPs() {
+  return knex('snps')
+  .orderBy('id');
+}
+
 function calcCalories(user) {
   let calories;
   if (user.gender === 2) {
@@ -23,8 +28,12 @@ function calcCalories(user) {
 }
 
 function getMacros(phenID) {
+  if (!phenID) {
+    return knex('phenotype_ntr')
+    .orderBy('id');
+  }
   return knex('phenotype_ntr')
-  .where('id', phenID);
+    .where('id', phenID);
 }
 
 function calcMacros(calories, phen) {
@@ -106,4 +115,5 @@ module.exports = {
   getUser,
   calculateMacros,
   getActivities,
+  getAllSNPs,
 };

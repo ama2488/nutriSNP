@@ -22,7 +22,9 @@
                         <h3 class='center'> Genotype </h3>
                         <% if (user) { %>
                           <% if (user.is_admin) { %>
-                            <a href="#edit_snp"> Edit Data </a>
+                            <h6 class='center'>
+                            <a href="#edit_snp"> Edit SNPs </a><br>
+                          </h6>
                             <% }; %>
                               <% }; %>
                                 <% variants.forEach((v)=>{ %>
@@ -34,17 +36,28 @@
                       </div>
                       <div class='col s6'>
                         <h3 class='center'> Phenotype </h3>
-                        <h5 class='thin'><%= phenotype.description %><h5>
+                        <% if (user) { %>
+                          <% if (user.is_admin) { %>
+                            <h6 class='center'>
+                          <a href="#edit_phen"> Edit Phenotypes </a>
+                          </h6>
+                            <%- include ./partials/editPhen %>
+                              <% }; %>
+                                <% }; %>
+                                  <h5 class='thin'><%= phenotype.description %><h5>
     </div>
   </div>
 <% }%>
 <% if (user) { %>
   <% if (!user.ttam_profile_id) { %>
-      <h5> please authorize 23andMe to view reccommendations based on your genotype. </h5>
-                        <a href="/auth">Authorize 23andMe</a>
-                        <% }; %>
-                          <% }; %>
-                            <%- include ./partials/editSNPs %>
+      <h5> please authorize 23andMe to view recommendations based on your genotype. </h5>
+                                  <div id="TTAM_wrapper">
+                                  </div>
+
+                                  <% }; %>
+                                    <% }; %>
+                                      <%- include ./partials/editSNPs %>
+
                       </div>
   </body>
 
