@@ -1,5 +1,12 @@
 
-/*@import "compass/css3";*/
+body {
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
+}
+main {
+    flex: 1 0 auto;
+}
 
 @import url(https://fonts.googleapis.com/css?family=Merriweather+Sans);
 div.social-wrap button {

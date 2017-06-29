@@ -5,18 +5,18 @@
 
   <body>
     <%- include ./partials/navbar %>
-      <div class='container scrollspy'>
-        <h1 class='thin'> hello, <%= profile.first%>.</h1>
+      <main class='container scrollspy'>
+        <h1 class='thin'> hello, <%= profile.first%></h1>
         <a href="#edit_profile" id='edit' class="btn btn-floating tooltipped lime pulse" data-position="bottom" data-delay="50" data-tooltip="Edit profile"><i class="material-icons">edit</i></a></br>
         <%- include ./partials/editprofile %>
           <% if(profile.age && profile.gender && profile.height && profile.weight) { %>
             <%- include ./partials/nutrition %>
               <% } else { %>
-                <div class='row center'>
-                  <div class='col m6 s12'>
-                    <h5 class='thin'>Edit your profile to receive custom calorie and macronutrient recommendations.</h5>
-                  </div>
+
+                <div class='col m6 s12 center'>
+                  <h5 class='thin'>Edit your profile to receive custom calorie and macronutrient recommendations.</h5>
                 </div>
+
 
                 <% }; %>
                   <% if (variants.length > 0) { %>
@@ -57,42 +57,46 @@
 <% }%>
 <% if (user) { %>
   <% if (!user.ttam_profile_id) { %>
-    <div class='row center'>
-      <div class='col m6 s12'>
-          <h5> Please authorize 23andMe to view recommendations based on your genotype. </h5>
-                        </div>
-                        <div id="TTAM_wrapper">
+<div class='row center'>
+      <div class='col s12 right'>
+          <h5 class='thin'> Authorize 23andMe to view recommendations based on your genotype. </h5>
+
+                                    <div id="TTAM_wrapper">
+                                    </div>
                         </div>
                       </div>
 
 
+
                       </br>
-                      <div class 'col s12 center'>
-                        <button class='waves-effect waves-light btn btn-floating indigo darken-4'>
+                      <div class='row center'>
+                        <div class 'col s12'>
+                          <button class='waves-effect waves-light btn indigo darken-4'>
                                       <a href='https://www.23andme.com/' class='thin white-text'>Don't have a 23andMe account? Learn more here.</a>
                                     </button></br>
+                        </div>
                       </div>
                       <% }; %>
                         <% }; %>
 
                           <%- include ./partials/editSNPs %>
-                    </div>
-                    <% if (!user) { %>
-                      <div class="hide-on-small-only">
-                        <div class="sticky">
-                          <div class='container center'>
-                            <div class='card-panel lime'>
-                              <h5 class='center white-text'> Sample </h5>
-                            </div>
-                            <h6> This is just a sample profile. </h6>
-                            <h6 class='thin'>Feel free to edit the profile to receive more accurate calorie recommendations.</h6>
-                            <h6 class='thin'>Even better, sign in or create an account so you can save your results and
+      </main>
+      <% if (!user) { %>
+        <div class="hide-on-small-only">
+          <div class="sticky">
+            <div class='container center'>
+              <div class='card-panel lime'>
+                <h5 class='center white-text'> Sample </h5>
+              </div>
+              <h6> This is just a sample profile. </h6>
+              <h6 class='thin'>Feel free to edit the profile to receive more accurate calorie recommendations.</h6>
+              <h6 class='thin'>Even better, sign in or create an account so you can save your results and
           pull in your 23andMe data for customized macronutrient recommendations.</h6>
-                          </div>
-                        </div>
-                      </div>
-                      <% }; %>
-                        <%- include ./partials/footer %>
+            </div>
+          </div>
+        </div>
+        <% }; %>
+          <%- include ./partials/footer %>
 
   </body>
 
