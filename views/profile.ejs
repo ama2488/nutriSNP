@@ -5,7 +5,7 @@
 
   <body>
     <%- include ./partials/navbar %>
-      <div class='container'>
+      <div class='container scrollspy'>
         <h1 class='thin'> hello, <%= profile.first%>.</h1>
         <a href="#edit_profile" id='edit' class="btn btn-floating tooltipped lime pulse" data-position="bottom" data-delay="50" data-tooltip="Edit profile"><i class="material-icons">edit</i></a></br>
         <%- include ./partials/editprofile %>
@@ -45,7 +45,7 @@
                               <%- include ./partials/editPhen %>
                                 <% }; %>
                                   <% }; %>
-                                    <h5 class='thin'><%= phenotype.description %><h5>
+                                    <h5 class='thin flow-text'><%= phenotype.description %><h5>
                                   </div>
     </div>
   </div>
@@ -55,13 +55,31 @@
       <h5> please authorize 23andMe to view recommendations based on your genotype. </h5>
                                     <div id="TTAM_wrapper">
                                     </div>
-                                    <a href='https://www.23andme.com/' class='thin'>Don't have a 23andMe account? Learn more here.</a></br>
+                                    </br>
+                                    <button class='waves-effect waves-light btn'>
+                                      <a href='https://www.23andme.com/' class='thin'>Don't have a 23andMe account? Learn more here.</a>
+                                    </button></br>
                                     <% }; %>
                                       <% }; %>
+
                                         <%- include ./partials/editSNPs %>
                         </div>
-                      </div>
-                      <%- include ./partials/footer %>
+                        <% if (!user) { %>
+                          <div class="hide-on-small-only">
+                            <div class="sticky">
+                              <div class='container center'>
+                                <div class='card-panel lime'>
+                                  <h5 class='center white-text'> Sample </h5>
+                                </div>
+                                <h6> This is just a sample profile. </h6>
+                                <h6 class='thin'>Feel free to edit the profile to receive more accurate calorie recommendations.</h6>
+                                <h6 class='thin'>Even better, sign in or create an account so you can save your results and
+          pull in your 23andMe data for customized macronutrient recommendations.</h6>
+                              </div>
+                            </div>
+                          </div>
+                          <% }; %>
+                            <%- include ./partials/footer %>
 
   </body>
 

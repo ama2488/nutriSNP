@@ -4,6 +4,11 @@ $(document).ready(() => {
   $('select').material_select();
   $('.parallax').parallax();
   $('.tooltipped').tooltip({ delay: 50 });
+  $('.sticky').pushpin({
+    top: 5,
+    offset: 200,
+  });
+  $('.scrollspy').scrollSpy();
   const currCals = parseInt($('#calories').html(), 10);
   const carb = ((parseInt($('#carb').html(), 10) * 4) / currCals).toFixed(2);
   const fat = ((parseInt($('#fat').html(), 10) * 9) / currCals).toFixed(2);
@@ -27,6 +32,9 @@ $(document).ready(() => {
       onmouseout(d, i) { console.log('onmouseout', d, i); },
     },
     donut: {
+      label: {
+        show: false,
+      },
       title: 'Macronutrients',
     },
     color: {
