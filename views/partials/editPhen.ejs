@@ -1,39 +1,40 @@
 <div id='edit_phen' class='modal'>
-  <div class='container'>
-    <h3> Edit Phenotypes </h3>
-    <% phenotypes.forEach((phen)=>{ %>
-      <form action="/admin/phen" method='post'>
-        <div class='row'>
-          <section class="input-field inline col s10">
-            <input name="id" type="text" class="validate" required="" aria-required="true" value='<%=phen.id%>' hidden>
-            <input name="name" ype="text" id="name" class="validate" required="" aria-required="true" value='<%=phen.name%>'>
-            <label class="active" for="name">Name</label>
-          </section>
-          <section class="input-field inline col s10">
-            <textarea name="description" id="description" type="text" class="materialize-textarea validate" required="" aria-required="true"><%= phen.description %></textarea>
-            <label class="active" for="description">Description</label>
-          </section>
-          <section class="input-field inline col s10">
-            <input name="carb" id="carb" type="text" class="validate" required="" aria-required="true" value='<%=phen.carb%>'>
-            <label class="active" for="carb">Carbs</label>
-          </section>
-          <section class="input-field inline col s10">
-            <input name="fat" id="fat" type="text" class="validate" required="" aria-required="true" value='<%=phen.fat%>'>
-            <label class="active" for="fat">Fat</label>
-          </section>
-          <section class="input-field inline col s10">
-            <input name="protein" id="protein" type="text" class="validate" required="" aria-required="true" value='<%= phen.protein %>'>
-            <label class="active" for="protein">Protein</label>
-          </section>
-          <section class="inline col s2 align-left">
-            <input type="submit" class="waves-effect waves-green btn-flat" value="Save">
-          </section>
+  <div class='modal-content'>
+    <div class='container'>
+      <h3 class='center'> Edit Phenotypes </h3>
+      <% phenotypes.forEach((phen)=>{ %>
+        <div class="card-panel indigo lighten-5">
+          <form action="/admin/phen" method='post'>
+            <div class='row center'>
+              <section class="input-field inline col s10">
+                <input name="id" type="text" class="validate" required="" aria-required="true" value='<%=phen.id%>' hidden>
+                <input name="name" ype="text" id="name" class="validate" required="" aria-required="true" value='<%=phen.name%>'>
+                <label class="active" for="name">Name</label>
+              </section>
+              <section class="input-field inline col s10">
+                <textarea name="description" id="description" type="text" class="materialize-textarea validate" required="" aria-required="true"><%= phen.description %></textarea>
+                <label class="active" for="description">Description</label>
+              </section>
+              <section class="input-field inline col s10">
+                <input name="carb" id="carb" type="text" class="validate" required="" aria-required="true" value='<%=phen.carb%>'>
+                <label class="active" for="carb">Carbs</label>
+              </section>
+              <section class="input-field inline col s10">
+                <input name="fat" id="fat" type="text" class="validate" required="" aria-required="true" value='<%=phen.fat%>'>
+                <label class="active" for="fat">Fat</label>
+              </section>
+              <section class="input-field inline col s10">
+                <input name="protein" id="protein" type="text" class="validate" required="" aria-required="true" value='<%= phen.protein %>'>
+                <label class="active" for="protein">Protein</label>
+              </section>
+              <section class="row center">
+                </br>
+                <button type='submit' class='col s5 push-s3 waves-effect waves-green btn-flat'>Save</button>
+              </section>
+            </div>
+          </form>
         </div>
-      </form>
-      <% }); %>
-        <section>
-          <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
-        </section>
-
+        <% }); %>
+    </div>
   </div>
 </div>

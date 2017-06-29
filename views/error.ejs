@@ -1,9 +1,12 @@
 <html>
 <%- include ./partials/head %>
 
+
   <body>
-    <h1><%= message %></h1>
-    <h2><%= error.status %></h2>
+    <%- include ./partials/navbar %>
+      <h1><%= message %></h1>
+      <h2><%= error.status %></h2>
+      <%- include ./partials/footer %>
   </body>
 
 </html>

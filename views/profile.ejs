@@ -6,9 +6,8 @@
   <body>
     <%- include ./partials/navbar %>
       <div class='container'>
-        <h1 class='center'><%= title %></h1>
-        <h5 class='thin'> hello, <%= profile.first%>.</h5>
-        <a href="#edit_profile">edit profile</a>
+        <h1 class='thin'> hello, <%= profile.first%>.</h1>
+        <a href="#edit_profile" class="btn btn-floating cyan pulse"><i class="material-icons">edit</i></a></br>
 
         <%- include ./partials/editprofile %>
           <% if(profile.age && profile.gender && profile.height && profile.weight) { %>
@@ -19,46 +18,53 @@
                   <% if (variants.length > 0) { %>
                     <div class='row'>
                       <div class='col s6'>
-                        <h3 class='center'> Genotype </h3>
-                        <% if (user) { %>
-                          <% if (user.is_admin) { %>
-                            <h6 class='center'>
+                        <div class='card-panel'>
+                          <h3 class='center'> Genotype </h3>
+                          <% if (user) { %>
+                            <% if (user.is_admin) { %>
+                              <h6 class='center'>
                             <a href="#edit_snp"> Edit SNPs </a><br>
                           </h6>
-                            <% }; %>
-                              <% }; %>
-                                <% variants.forEach((v)=>{ %>
-                                  <a href='<%=v.description%>'>
-                                    <%=v.name%>
-                                  </a>
-                                  <h5><%=v.variant%></h5>
-                                  <% }); %>
-                      </div>
-                      <div class='col s6'>
-                        <h3 class='center'> Phenotype </h3>
-                        <% if (user) { %>
-                          <% if (user.is_admin) { %>
-                            <h6 class='center'>
-                          <a href="#edit_phen"> Edit Phenotypes </a>
-                          </h6>
-                            <%- include ./partials/editPhen %>
                               <% }; %>
                                 <% }; %>
-                                  <h5 class='thin'><%= phenotype.description %><h5>
+                                  <% variants.forEach((v)=>{ %>
+                                    <a href='<%=v.description%>'>
+                                      <%=v.name%>
+                                    </a>
+                                    <h5><%=v.variant%></h5>
+                                    <% }); %>
+                        </div>
+                      </div>
+                      <div class='col s6'>
+                        <div class='card-panel'>
+                          <h3 class='center'> Phenotype </h3>
+                          <% if (user) { %>
+                            <% if (user.is_admin) { %>
+                              <h6 class='center'>
+                          <a href="#edit_phen"> Edit Phenotypes </a>
+                          </h6>
+                              <%- include ./partials/editPhen %>
+                                <% }; %>
+                                  <% }; %>
+                                    <h5 class='thin'><%= phenotype.description %><h5>
+                                  </div>
     </div>
   </div>
 <% }%>
 <% if (user) { %>
   <% if (!user.ttam_profile_id) { %>
       <h5> please authorize 23andMe to view recommendations based on your genotype. </h5>
-                                  <div id="TTAM_wrapper">
-                                  </div>
-
-                                  <% }; %>
+                                    <div id="TTAM_wrapper">
+                                    </div>
+                                    <a href='https://www.23andme.com/' class='thin'>Don't have a 23andMe account? Learn more here.</a></br>
                                     <% }; %>
-                                      <%- include ./partials/editSNPs %>
-
+                                      <% }; %>
+                                        <%- include ./partials/editSNPs %>
+                        </div>
                       </div>
+                      <%- include ./partials/footer %>
+
   </body>
+
 
 </html>

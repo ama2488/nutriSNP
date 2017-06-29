@@ -1,43 +1,51 @@
 <div id='edit_snp' class='modal'>
-  <div class='container'>
-    <h3> Edit SNP Info </h3>
-    <div class='snpItems'>
-      <% snps.forEach((v)=>{ %>
-        <form action="/admin/snp" method='post'>
-          <div class='row'>
-            <section class="input-field inline col s10">
-              <input name="id" type="text" class="validate" required="" aria-required="true" value='<%=v.id%>' hidden>
-              <input name="name" type="text" class="validate" required="" aria-required="true" value='<%=v.name%>' hidden>
-              <input name="description" id="<%=v.id%>" type="text" class="validate" required="" aria-required="true" value='<%= v.description %>'>
-              <label class="active" for="<%=v.id%>"><%=v.name%></label>
-            </section>
-            <section class="inline col s2 align-left">
-              <input type="submit" class="waves-effect waves-green btn-flat" value="Save">
-              <input id='<%=v.id%>' class='deleteSNP waves-effect waves-green btn-flat' value='Delete'>
-            </section>
+  <div class='modal-content'>
+    <div class='container'>
+      <h3 class='center'> Edit SNPs </h3>
+      <div class='snpItems'>
+        <% snps.forEach((v)=>{ %>
+          <div class="card-panel indigo lighten-5">
+            <form action="/admin/snp" method='post'>
+              <div class='row'>
+                <section class="input-field inline col s10">
+                  <input name="id" type="text" class="validate" required="" aria-required="true" value='<%=v.id%>' hidden>
+                  <input name="name" type="text" class="validate" required="" aria-required="true" value='<%=v.name%>' hidden>
+                  <input name="description" id="<%=v.id%>" type="text" class="validate" required="" aria-required="true" value='<%= v.description %>'>
+                  <label class="active" for="<%=v.id%>"><%=v.name%></label>
+                </section>
+                <section class="row center">
+                  <button type="submit" class="col s5 waves-effect waves-green btn-flat">Save</button>
+                  <button id='<%=v.id%>' class='col s5 deleteSNP waves-effect waves-green btn-flat'>Delete</button>
+                </section>
+              </div>
+            </form>
           </div>
-        </form>
-        <% }); %>
-          <form action="/admin/snp/add" method='post'>
-            <div class='row'>
-              <section class='input-field inline col s10'>
-                <input name="id" type="text" class="validate" required="" aria-required="true" value='<%=variants.length + 1%>' hidden>
-                <input name='name' id='name' type='text' class='validate' required='' aria-required='true' value=''>
-                <label class='active' for='name'>SNP</label>
-              </section>
-              <section class='input-field inline col s10'>
-                <input name='description' id='desc' type='text' class='validate' required='' aria-required='true' value=''>
-                <label class='active' for='desc'>Link</label>
-              </section>
-              <section class='inline col s2 align-left'>
-                <input type='submit' class='waves-effect waves-green btn-flat' value='Add'>
-              </section>
+          <% }); %>
+            <div class="card-panel indigo lighten-5">
+              <form action="/admin/snp/add" method='post'>
+                <div class='row'>
+                  <section class='input-field inline col s10'>
+                    <input name="id" type="text" class="validate" required="" aria-required="true" value='<%=variants.length + 1%>' hidden>
+                    <input name='name' id='name' type='text' class='validate' required='' aria-required='true' value=''>
+                    <label class='active' for='name'>SNP</label>
+                  </section>
+                  <section class='input-field inline col s10'>
+                    <input name='description' id='desc' type='text' class='validate' required='' aria-required='true' value=''>
+                    <label class='active' for='desc'>Link</label>
+                  </section>
+                  <section class='row center'>
+                    <button type='submit' class='col s5 waves-effect waves-green btn-flat'>Add</button>
+                  </section>
+                </div>
+              </form>
             </div>
-          </form>
-    </div>
-    <section>
-      <a href="#!" class="modal-action modal-close waves-effect waves-green btn-flat">Cancel</a>
-    </section>
+      </div>
 
+    </div>
   </div>
+</div>
+</div>
+
+</div>
+</div>
 </div>

@@ -1,21 +1,22 @@
 <div id='edit_profile' class='modal'>
-  <div class='container'>
-    <h3> Edit Profile </h3>
-    <form action="/profile/<%=profile.id%>" method='post'>
-      <section class="input-field col s12">
-        <input name="age" id="age" type="number" class="validate" required="" aria-required="true" value='<%= profile.age %>'>
-        <label class="active" for="age">age (years)</label>
-      </section>
-      <section class="input-field col s12">
-        <input name="height" id="height" type="number" class="validate" required="" aria-required="true" value='<%= profile.height %>'>
-        <label class="active" for="height">height (inches)</label>
-      </section>
-      <section class="input-field col s12">
-        <input name="weight" id="weight" type="number" class="validate" required="" aria-required="true" value='<%= profile.weight %>'>
-        <label class="active" for="weight">weight (lbs)</label>
-      </section>
-      <section class="input-field col s12">
-        <select name="gender">
+  <div class='modal-content'>
+    <div class='container'>
+      <h3 class='center'> Edit Profile </h3>
+      <form action="/profile/<%=profile.id%>" method='post'>
+        <section class="input-field col s12">
+          <input name="age" id="age" type="number" class="validate" required="" aria-required="true" value='<%= profile.age %>'>
+          <label class="active" for="age">age (years)</label>
+        </section>
+        <section class="input-field col s12">
+          <input name="height" id="height" type="number" class="validate" required="" aria-required="true" value='<%= profile.height %>'>
+          <label class="active" for="height">height (inches)</label>
+        </section>
+        <section class="input-field col s12">
+          <input name="weight" id="weight" type="number" class="validate" required="" aria-required="true" value='<%= profile.weight %>'>
+          <label class="active" for="weight">weight (lbs)</label>
+        </section>
+        <section class="input-field col s12">
+          <select name="gender">
   <% if (!profile.gender){ %>
     <option value="" disabled selected>Gender</option>
     <option value="2">Male</option>
@@ -30,7 +31,7 @@
     <option value="1" selected>Female</option>
   <% }; %>
 </select>
-        <select name="activity_level">
+          <select name="activity_level">
 <% activityLevels.forEach((activity)=>{ %>
   <% if (activity.factor === profile.activity_level) { %>
 <option value="<%=activity.factor%>" selected><%=activity.title%></option>
@@ -39,10 +40,11 @@
   <% }; %>
   <% }); %>
 </select>
-      </section>
-      <section class="">
-        <input type="submit" class="waves-effect waves-green btn-flat" value="Save">
-      </section>
-    </form>
+        </section>
+        <section class="row center">
+          <button type='submit' class='col s6 push-s3 btn waves-effect indigo thin'>Save</button>
+        </section>
+      </form>
+    </div>
   </div>
 </div>

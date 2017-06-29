@@ -39,7 +39,6 @@ Users.createUser = (data, callback) => {
 Users.createFbUser = (data, callback) => {
   Users().where('fbid', data.id).first().then((account) => {
     if (account) {
-      console.log('account:', account);
       return callback(undefined, account);
     }
     Users().insert({ fbid: data.id,
@@ -50,7 +49,6 @@ Users.createFbUser = (data, callback) => {
       is_admin: false })
       .returning('*').first()
       .then((result) => {
-        console.log('res:', result);
         callback(undefined, result);
       })
       .catch((err) => {

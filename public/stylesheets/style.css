@@ -1,4 +1,5 @@
-@import "compass/css3";
+
+/*@import "compass/css3";*/
 
 @import url(https://fonts.googleapis.com/css?family=Merriweather+Sans);
  div.social-wrap button {
@@ -22,17 +23,8 @@
     box-shadow: 0 4px 2px -2px gray;
     text-shadow: rgba(0, 0, 0, .5) -1px -1px 0;
 }
-
-body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
-
-a {
-  color: #00B7FF;
-}
-
 button#facebook {
+    margin: auto;
     border-color: #2d5073;
     background-color: #3b5998;
     background-image: url(http://icons.iconarchive.com/icons/danleech/simple/512/facebook-icon.png);
@@ -40,4 +32,24 @@ button#facebook {
 
 div.social-wrap button:active {
     background-color: #222;
+}
+
+ul.sm-wrap {
+    list-style-type: none;
+    padding: 0px;
+}
+ul.sm-wrap li {
+    font-family:"Helvetica", sans-serif;
+    font-size: 11px;
+    margin-bottom: 10px;
+    padding-left: 20px;
+    background-size: auto 100%;
+    background-repeat: no-repeat;
+}
+ul.sm-wrap li#facebook-sm {
+    background-image: url(http://icons.iconarchive.com/icons/danleech/simple/512/facebook-icon.png);
+}
+
+ul.sm-wrap a{
+    text-decoration: none;
 }
