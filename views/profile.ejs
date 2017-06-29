@@ -23,7 +23,9 @@
                     <div class='row'>
                       <div class='col s12 m6'>
                         <div class='card-panel'>
-                          <h3 class='center'> Genotype </h3>
+                          <div class='card-panel indigo darken-4'>
+                            <h3 class='center white-text'> Genotype </h3>
+                          </div>
                           <% if (user) { %>
                             <% if (user.is_admin) { %>
                               <h6 class='center'>
@@ -31,17 +33,36 @@
                           </h6>
                               <% }; %>
                                 <% }; %>
-                                  <% variants.forEach((v)=>{ %>
-                                    <a href='<%=v.description%>'>
-                                      <%=v.name%>
-                                    </a>
-                                    <h5><%=v.variant%></h5>
-                                    <% }); %>
+                                  <div class='container'>
+                                    <table class='centered bordered'>
+                                      <thead>
+                                        <tr>
+                                          <th>SNP</th>
+                                          <th>Variant</th>
+                                        </tr>
+                                      </thead>
+                                      <tbody>
+                                        <% variants.forEach((v)=>{ %>
+                                          <tr>
+                                            <td>
+                                              <a href='<%=v.description%>'>
+                                                <h5><%=v.name%></h5>
+                                              </a>
+                                            </td>
+                                            <td>
+                                              <h5 class='thin'><%=v.variant%></h5></td>
+                                          </tr>
+                                          <% }); %>
+                                      </tbody>
+                                    </table>
+                                  </div>
                         </div>
                       </div>
                       <div class='col s12 m6'>
                         <div class='card-panel'>
-                          <h3 class='center'> Phenotype </h3>
+                          <div class='card-panel indigo darken-4'>
+                            <h3 class='center white-text'> Phenotype </h3>
+                          </div>
                           <% if (user) { %>
                             <% if (user.is_admin) { %>
                               <h6 class='center'>
@@ -85,13 +106,15 @@
         <div class="hide-on-small-only">
           <div class="sticky">
             <div class='container center'>
-              <div class='card-panel lime'>
-                <h5 class='center white-text'> Sample </h5>
-              </div>
-              <h6> This is just a sample profile. </h6>
-              <h6 class='thin'>Feel free to edit the profile to receive more accurate calorie recommendations.</h6>
-              <h6 class='thin'>Even better, sign in or create an account so you can save your results and
+              <div class='card-panel'>
+                <div class='card-panel lime'>
+                  <h5 class='center white-text'> Sample </h5>
+                </div>
+                <h6> This is just a sample profile. </h6>
+                <h6 class='thin'>Edit the profile to receive more accurate calorie recommendations.</h6>
+                <h6 class='thin'>Even better, sign in to save your results and
           pull in your 23andMe data for customized macronutrient recommendations.</h6>
+              </div>
             </div>
           </div>
         </div>

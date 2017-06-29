@@ -38,7 +38,7 @@ $(document).ready(() => {
       title: 'Macronutrients',
     },
     color: {
-      pattern: ['#1f77b4', '#26A69A', '#354171'],
+      pattern: ['#1565c0', '#dce775', '#80deea'],
     },
   });
 
