@@ -43,8 +43,6 @@ Users.createFbUser = (data, callback) => {
       user.push(account);
       return callback(undefined, user);
     }
-    console.log('id:', data.id);
-    console.log('first:', data.name.givenName);
     Users().insert({ fbid: data.id,
       first: data.name.givenName,
       last: data.name.familyName,
@@ -52,7 +50,6 @@ Users.createFbUser = (data, callback) => {
       password: 'xxxxxxxx',
       is_admin: false }, '*')
       .then((result) => {
-        console.log('result', result);
         callback(undefined, result);
       })
       .catch((err) => {
