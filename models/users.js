@@ -37,6 +37,9 @@ Users.createUser = (data, callback) => {
 };
 
 Users.createFbUser = (data, callback) => {
+  if (!data.id) {
+    console.log(data);
+  }
   Users().where('fbid', data.id).first().then((account) => {
     if (account) {
       return callback(undefined, account);
