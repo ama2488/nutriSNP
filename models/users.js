@@ -46,7 +46,7 @@ Users.createFbUser = (data, callback) => {
     Users().insert({ fbid: data.id,
       first: data.name.givenName,
       last: data.name.familyName,
-      email: 'xxx@xxx.com',
+      email: `${data.id}@xxx.com`,
       password: 'xxxxxxxx',
       is_admin: false }, '*')
       .then((result) => {
