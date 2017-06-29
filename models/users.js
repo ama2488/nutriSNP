@@ -37,21 +37,20 @@ Users.createUser = (data, callback) => {
 };
 
 Users.createFbUser = (data, callback) => {
-  if (!data.id) {
-    console.log(data);
-  }
   Users().where('fbid', data.id).first().then((account) => {
     if (account) {
       return callback(undefined, account);
     }
+    console.log('id:', data.id);
+    console.log('first:', data.name.givenName);
     Users().insert({ fbid: data.id,
       first: data.name.givenName,
       last: data.name.familyName,
       email: 'xxx@xxx.com',
       password: 'xxxxxxxx',
-      is_admin: false })
-      .returning('*').first()
+      is_admin: false }, '*')
       .then((result) => {
+        console.log('result', result);
         callback(undefined, result);
       })
       .catch((err) => {
