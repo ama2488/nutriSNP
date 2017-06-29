@@ -1,37 +1,40 @@
 <nav>
   <div class="nav-wrapper indigo darken-2">
-    <a href="/" class="brand-logo thin white-text">
+    <div class='container'>
+      <a href="/" class="brand-logo thin white-text">
     nutriSNP
     </a>
-    <a href="#" data-activates="mobile-menu" class="button-collapse hide-on-lg-and-up right"><i class="material-icons">menu</i></a>
-    <ul id="nav" class="right hide-on-med-and-down">
-      <li><a href="/">Home</a></li>
-      <li><a href="/profile">Profile</a></li>
-      <% if (!user) { %>
-        <li><a href="#sign_in">Sign In</a></li>
-        <% }; %>
-          <% if (user) { %>
-            <li>
-              <a href="#sign_out">
-                <%= user.first %>
-              </a>
-            </li>
-            <% }; %>
-    </ul>
-    <ul class="side-nav right" id="mobile-menu">
-      <li><a href="/">Home</a></li>
-      <li><a href="/profile">Profile</a></li>
-      <% if (!user) { %>
-        <li><a href="#sign_in">Sign In</a></li>
-        <% }; %>
-          <% if (user) { %>
-            <li>
-              <a href="#sign_out">
-                <%= user.first %>
-              </a>
-            </li>
-            <% }; %>
-    </ul>
+
+      <a href="#" data-activates="mobile-menu" class="button-collapse hide-on-lg-and-up right"><i class="material-icons">menu</i></a>
+      <ul id="nav" class="right hide-on-med-and-down">
+        <li><a href="/">Home</a></li>
+        <li><a href="/profile">Profile</a></li>
+        <% if (!user) { %>
+          <li><a href="#sign_in">Sign In</a></li>
+          <% }; %>
+            <% if (user) { %>
+              <li>
+                <a href="#sign_out">
+                  <%= user.first %>
+                </a>
+              </li>
+              <% }; %>
+      </ul>
+      <ul class="side-nav right" id="mobile-menu">
+        <li><a href="/">Home</a></li>
+        <li><a href="/profile">Profile</a></li>
+        <% if (!user) { %>
+          <li><a href="#sign_in">Sign In</a></li>
+          <% }; %>
+            <% if (user) { %>
+              <li>
+                <a href="#sign_out">
+                  <%= user.first %>
+                </a>
+              </li>
+              <% }; %>
+      </ul>
+    </div>
   </div>
 </nav>
 

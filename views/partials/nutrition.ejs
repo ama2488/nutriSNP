@@ -1,18 +1,19 @@
 </br>
 <div class='row'>
-  <div class='col s6'>
-    <div class='card-panel center lime-text'>
-      <div class='card-panel indigo darken-2'>
-        <h3 class='white-text'><span id='calories'><%= calories %> </span>Calories</h3>
+  <div class='col s12 m6 right'>
+    <div id='chart' height='300px' width='100%'></div>
+  </div>
+  <div class='col s12 m6 left'>
+    <div class='card-panel center indigo-text'>
+      <div class='card-panel indigo lighten-1'>
+        <h3 class='white-text'><span id='calories'><%= calories %> </span> Calories</h3>
       </div>
-      <h4>Carbs | <span id='carb' class='thin'><%= macros.carbs %> </span>grams</h3>
-      <h4>Fat   | <span id='fat' class='thin'><%= macros.fat %> </span>grams</h3>
-      <h4>Protein | <span id='protein' class='thin'>  <%= macros.protein %> </span>grams <h3>
+      <h4>Carbs | <span id='carb' class='thin'><%= macros.carbs %> </span><span class='thin'> grams</span></h3>
+      <h4>Fat   | <span id='fat' class='thin'><%= macros.fat %> </span><span class='thin'> grams</span></h3>
+      <h4>Protein | <span id='protein' class='thin'>  <%= macros.protein %> </span><span class='thin'> grams</span> <h3>
 </div>
 </div>
-<div class = 'col s6'>
-<div id='chart' height='300px' width = '100%'></div>
-</div>
+
 </div>
 <div class='col s12'>
 <form action="#">

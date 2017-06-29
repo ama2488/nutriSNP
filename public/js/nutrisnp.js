@@ -3,6 +3,7 @@ $(document).ready(() => {
   $('.modal').modal();
   $('select').material_select();
   $('.parallax').parallax();
+  $('.tooltipped').tooltip({ delay: 50 });
   const currCals = parseInt($('#calories').html(), 10);
   const carb = ((parseInt($('#carb').html(), 10) * 4) / currCals).toFixed(2);
   const fat = ((parseInt($('#fat').html(), 10) * 9) / currCals).toFixed(2);
@@ -53,7 +54,8 @@ $(document).ready(() => {
 
   function deleteItem(e) {
     e.preventDefault();
-    const id = e.target.children[0].id;
+    const id = e.target.getAttribute('id');
+    console.log(e.target);
     $.ajax({
       url: `/admin/snp/${id}`,
       type: 'DELETE',
@@ -63,7 +65,7 @@ $(document).ready(() => {
         window.location.replace('/profile/');
       },
       error(err) {
-        Materialize.toast(err.responseText, 3000, 'rounded');
+        console.log(err);
       },
     });
   }
@@ -100,6 +102,7 @@ $(document).ready(() => {
       document.body.scrollLeft = scroll.left;
     }
   }
+
   $('#fblogin').on('click', (e) => { fbAuth(e); });
   $('.deleteSNP').on('click', (e) => { deleteItem(e); });
   $('#goals').on('change', (e) => { updateMacros(e); });

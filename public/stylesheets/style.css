@@ -2,54 +2,77 @@
 /*@import "compass/css3";*/
 
 @import url(https://fonts.googleapis.com/css?family=Merriweather+Sans);
- div.social-wrap button {
-    padding-right: 45px;
-    height: 35px;
-    background: none;
-    border: none;
-    display: block;
-    background-size: 35px 35px;
-    background-position: right center;
-    background-repeat: no-repeat;
-    border-radius: 4px;
-    color: white;
-    font-family:"Merriweather Sans", sans-serif;
-    font-size: 14px;
-    margin-bottom: 15px;
-    width: 205px;
-    border-bottom: 2px solid transparent;
-    border-left: 1px solid transparent;
-    border-right: 1px solid transparent;
-    box-shadow: 0 4px 2px -2px gray;
-    text-shadow: rgba(0, 0, 0, .5) -1px -1px 0;
+div.social-wrap button {
+  padding-right: 45px;
+  height: 35px;
+  background: none;
+  border: none;
+  display: block;
+  background-size: 35px 35px;
+  background-position: right center;
+  background-repeat: no-repeat;
+  border-radius: 4px;
+  color: white;
+  font-family:"Merriweather Sans", sans-serif;
+  font-size: 14px;
+  margin-bottom: 15px;
+  width: 205px;
+  border-bottom: 2px solid transparent;
+  border-left: 1px solid transparent;
+  border-right: 1px solid transparent;
+  box-shadow: 0 4px 2px -2px gray;
+  text-shadow: rgba(0, 0, 0, .5) -1px -1px 0;
 }
 button#facebook {
-    margin: auto;
-    border-color: #2d5073;
-    background-color: #3b5998;
-    background-image: url(http://icons.iconarchive.com/icons/danleech/simple/512/facebook-icon.png);
+  margin: auto;
+  border-color: #2d5073;
+  background-color: #3b5998;
+  background-image: url(http://icons.iconarchive.com/icons/danleech/simple/512/facebook-icon.png);
 }
 
 div.social-wrap button:active {
-    background-color: #222;
+  background-color: #222;
 }
 
 ul.sm-wrap {
-    list-style-type: none;
-    padding: 0px;
+  list-style-type: none;
+  padding: 0px;
 }
 ul.sm-wrap li {
-    font-family:"Helvetica", sans-serif;
-    font-size: 11px;
-    margin-bottom: 10px;
-    padding-left: 20px;
-    background-size: auto 100%;
-    background-repeat: no-repeat;
+  font-family:"Helvetica", sans-serif;
+  font-size: 11px;
+  margin-bottom: 10px;
+  padding-left: 20px;
+  background-size: auto 100%;
+  background-repeat: no-repeat;
 }
 ul.sm-wrap li#facebook-sm {
-    background-image: url(http://icons.iconarchive.com/icons/danleech/simple/512/facebook-icon.png);
+  background-image: url(http://icons.iconarchive.com/icons/danleech/simple/512/facebook-icon.png);
 }
 
 ul.sm-wrap a{
-    text-decoration: none;
+  text-decoration: none;
 }
+
+
+.backdrop{
+  background-color: #5C6BC0;
+}
+
+input[type=range]::-webkit-slider-thumb {
+    background-color: #CDDC39;
+  }
+  input[type=range]::-moz-range-thumb {
+    background-color: #CDDC39;
+  }
+  input[type=range]::-ms-thumb {
+    background-color: #CDDC39;
+  }
+
+  /***** These are to edit the thumb and the text inside the thumb *****/
+  input[type=range] + .thumb {
+    background-color: #CDDC39;
+  }
+  input[type=range] + .thumb.active .value {
+    color: #5C6BC0;
+  }

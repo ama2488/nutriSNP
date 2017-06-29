@@ -7,17 +7,16 @@
     <%- include ./partials/navbar %>
       <div class='container'>
         <h1 class='thin'> hello, <%= profile.first%>.</h1>
-        <a href="#edit_profile" class="btn btn-floating cyan pulse"><i class="material-icons">edit</i></a></br>
-
+        <a href="#edit_profile" id='edit' class="btn btn-floating tooltipped lime pulse" data-position="bottom" data-delay="50" data-tooltip="Edit profile"><i class="material-icons">edit</i></a></br>
         <%- include ./partials/editprofile %>
           <% if(profile.age && profile.gender && profile.height && profile.weight) { %>
             <%- include ./partials/nutrition %>
               <% } else { %>
-                <h5> please complete your profile </h5>
+                <h5>Edit your profile to receive custom calorie and macronutrient recommendations.</h5>
                 <% }; %>
                   <% if (variants.length > 0) { %>
                     <div class='row'>
-                      <div class='col s6'>
+                      <div class='col s12 m6'>
                         <div class='card-panel'>
                           <h3 class='center'> Genotype </h3>
                           <% if (user) { %>
@@ -35,7 +34,7 @@
                                     <% }); %>
                         </div>
                       </div>
-                      <div class='col s6'>
+                      <div class='col s12 m6'>
                         <div class='card-panel'>
                           <h3 class='center'> Phenotype </h3>
                           <% if (user) { %>

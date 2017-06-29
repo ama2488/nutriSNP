@@ -52,7 +52,7 @@ passport.deserializeUser((obj, done) => {
 passport.use(new FacebookStrategy({
   clientID: process.env.FACEBOOK_APP_ID,
   clientSecret: process.env.FACEBOOK_APP_SECRET,
-  callbackURL: 'http://localhost:3000/auth/facebook/callback',
+  callbackURL: process.env.NODE_ENV === 'production' ? 'https://nutrisnp.herokuapp.com/auth/facebook/callback' : 'http://localhost:3000/auth/facebook/callback',
   profileFields: ['id', 'displayName', 'email', 'name'],
 },
 (accessToken, refreshToken, prof, done) => {
@@ -67,7 +67,6 @@ app.get('/auth/facebook/callback',
     passport.authenticate('facebook', { failureRedirect: '/', scope: 'email' }),
     (req, res) => {
       user.createFbUser(req.user, (err, result) => {
-        console.log('result:', result);
         if (err) {
           console.log('error', err);
         } else {
@@ -92,7 +91,7 @@ app.use((err, req, res, next) => {
 
   // render the error page
   res.status(err.status || 500);
-  res.render('error');
+  res.render('error', { user: req.session.user });
 });
 
 module.exports = app;
