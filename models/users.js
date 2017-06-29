@@ -39,7 +39,9 @@ Users.createUser = (data, callback) => {
 Users.createFbUser = (data, callback) => {
   Users().where('fbid', data.id).first().then((account) => {
     if (account) {
-      return callback(undefined, account);
+      const user = [];
+      user.push(account);
+      return callback(undefined, user);
     }
     console.log('id:', data.id);
     console.log('first:', data.name.givenName);
