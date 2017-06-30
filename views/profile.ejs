@@ -12,116 +12,37 @@
           <% if(profile.age && profile.gender && profile.height && profile.weight) { %>
             <%- include ./partials/nutrition %>
               <% } else { %>
-
-                <div class='col m6 s12 center'>
+                <section class='col m6 s12 center'>
                   <h5 class='thin'>Edit your profile to receive custom calorie and macronutrient recommendations.</h5>
-                </div>
-
-
+                </section>
                 <% }; %>
                   <% if (variants.length > 0) { %>
-                    <div class='row'>
-                      <div class='col s12 m6'>
-                        <div class='card-panel'>
-                          <div class='card-panel indigo darken-4'>
-                            <h3 class='center white-text'> Genotype </h3>
-                          </div>
-                          <% if (user) { %>
-                            <% if (user.is_admin) { %>
-                              <h6 class='center'>
-                            <a href="#edit_snp"> Edit SNPs </a><br>
-                          </h6>
+                    <%- include ./partials/genetics %>
+                      <% }%>
+                        <% if (user) { %>
+                          <% if (!user.ttam_profile_id) { %>
+                            <article class='row center'>
+                              <section class='col s12 right'>
+                                <h5 class='thin'> Authorize 23andMe to view recommendations based on your genotype. </h5>
+                                <div id="TTAM_wrapper"></div>
+                              </section>
+                            </article>
+                            </br>
+                            <article class='row center'>
+                              <section class 'col s12'>
+                                <button class='waves-effect waves-light btn indigo darken-4'>
+              <a href='https://www.23andme.com/' class='thin white-text'>No 23andMe account? Learn more here.</a>
+              </button></br>
+                              </section>
+                            </article>
+                            <% }; %>
                               <% }; %>
-                                <% }; %>
-                                  <div class='container'>
-                                    <table class='centered bordered'>
-                                      <thead>
-                                        <tr>
-                                          <th>SNP</th>
-                                          <th>Variant</th>
-                                        </tr>
-                                      </thead>
-                                      <tbody>
-                                        <% variants.forEach((v)=>{ %>
-                                          <tr>
-                                            <td>
-                                              <a href='<%=v.description%>'>
-                                                <h5><%=v.name%></h5>
-                                              </a>
-                                            </td>
-                                            <td>
-                                              <h5 class='thin'><%=v.variant%></h5></td>
-                                          </tr>
-                                          <% }); %>
-                                      </tbody>
-                                    </table>
-                                  </div>
-                        </div>
-                      </div>
-                      <div class='col s12 m6'>
-                        <div class='card-panel'>
-                          <div class='card-panel indigo darken-4'>
-                            <h3 class='center white-text'> Phenotype </h3>
-                          </div>
-                          <% if (user) { %>
-                            <% if (user.is_admin) { %>
-                              <h6 class='center'>
-                          <a href="#edit_phen"> Edit Phenotypes </a>
-                          </h6>
-                              <%- include ./partials/editPhen %>
-                                <% }; %>
-                                  <% }; %>
-                                    <h5 class='thin flow-text'><%= phenotype.description %><h5>
-                                  </div>
-    </div>
-  </div>
-<% }%>
-<% if (user) { %>
-  <% if (!user.ttam_profile_id) { %>
-<div class='row center'>
-      <div class='col s12 right'>
-          <h5 class='thin'> Authorize 23andMe to view recommendations based on your genotype. </h5>
-
-                                    <div id="TTAM_wrapper">
-                                    </div>
-                        </div>
-                      </div>
-
-
-
-                      </br>
-                      <div class='row center'>
-                        <div class 'col s12'>
-                          <button class='waves-effect waves-light btn indigo darken-4'>
-                                      <a href='https://www.23andme.com/' class='thin white-text'>Don't have a 23andMe account? Learn more here.</a>
-                                    </button></br>
-                        </div>
-                      </div>
-                      <% }; %>
-                        <% }; %>
-
-                          <%- include ./partials/editSNPs %>
       </main>
       <% if (!user) { %>
-        <div class="hide-on-small-only">
-          <div class="sticky">
-            <div class='container center'>
-              <div class='card-panel'>
-                <div class='card-panel lime'>
-                  <h5 class='center white-text'> Sample </h5>
-                </div>
-                <h6> This is just a sample profile. </h6>
-                <h6 class='thin'>Edit the profile to receive more accurate calorie recommendations.</h6>
-                <h6 class='thin'>Even better, sign in to save your results and
-          pull in your 23andMe data for customized macronutrient recommendations.</h6>
-              </div>
-            </div>
-          </div>
-        </div>
-        <% }; %>
-          <%- include ./partials/footer %>
+        <%- include ./partials/sample %>
+          <% }; %>
+            <%- include ./partials/footer %>
 
   </body>
-
 
 </html>
