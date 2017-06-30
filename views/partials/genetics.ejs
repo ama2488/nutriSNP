@@ -1,0 +1,54 @@
+<main class='row'>
+  <article class='col s12 l6'>
+    <div class='card-panel'>
+      <header class='card-panel indigo darken-4'>
+        <h3 class='center white-text'> Genotype </h3>
+      </header>
+      <% if (user) { %>
+        <% if (user.is_admin) { %>
+          <h6 class='center'>
+          <a href="#edit_snp"> Edit SNPs </a><br>
+          </h6>
+          <%- include ./editSNPs %>
+            <% }; %>
+              <% }; %>
+                <section class='container'>
+                  <table class='centered bordered'>
+                    <thead>
+                      <tr>
+                        <th>SNP</th>
+                        <th>Variant</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <% variants.forEach((v)=>{ %>
+                        <tr>
+                          <td>
+                            <a href='<%=v.description%>'>
+                              <h5><%=v.name%></h5>
+                            </a>
+                          </td>
+                          <td>
+                            <h5 class='thin'><%=v.variant%></h5></td>
+                        </tr>
+                        <% }); %>
+                    </tbody>
+                  </table>
+                </section>
+    </div>
+  </article>
+  <article class='col s12 l6'>
+    <section class='card-panel'>
+      <header class='card-panel indigo darken-4'>
+        <h3 class='center white-text'> Phenotype </h3>
+      </header>
+      <% if (user) { %>
+        <% if (user.is_admin) { %>
+          <h6 class='center'><a href="#edit_phen"> Edit Phenotypes </a></h6>
+          <%- include ./editPhen %>
+            <% }; %>
+              <% }; %>
+                <h5 class='thin flow-text'><%= phenotype.description %><h5>
+                </section>
+              </article>
+            </main>
