@@ -1,5 +1,5 @@
 # nutriSNP
-[live site](https://nutrisnp.herokuapp.com/)
+[nutriSNP](https://nutrisnp.herokuapp.com/)
 
 Advanced calorie and macronutrient calculator based on users' unique genetic variants. Allows users to import their results from 23andMe and input some basic information about themselves to reveal recommendations tailored to them.
 
