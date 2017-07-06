@@ -95,7 +95,6 @@ router.get('/genome', (req, res, next) => {
       getTTAM(profile, token, 4, 'rs1801282'),
       getTTAM(profile, token, 5, 'rs1042714')])
     .then((allData) => {
-      console.log(allData);
       users.updateSNPs(allData)
       .catch((err) => {
         console.log(err);
