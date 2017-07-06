@@ -7,10 +7,4 @@ const schema = Joi.object().keys({
   password: Joi.string().min(5).max(15).required(),
 });
 
-// const options = {
-//   language: {
-//     key: '{{key}} ',
-//   },
-// };
-
 module.exports = schema;

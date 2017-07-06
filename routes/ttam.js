@@ -37,10 +37,8 @@ router.get('/auth', (req, res) => {
 router.get('/receive_code', (req, res) => {
   const code = req.query.code;
   if (!code) {
-    res.send('Error!!');
+    res.send('Error!');
   } else {
-    console.log('running');
-
     oauth2.authorizationCode.getToken({
       code,
       redirect_uri: callback,
@@ -74,27 +72,36 @@ router.get('/receive_code', (req, res) => {
 router.get('/genome', (req, res, next) => {
   const profile = req.session.user.ttam_profile_id;
   const token = req.session.token;
+
   function getTTAM(profileID, userToken, snpID, snpName) {
-    request.get(`https://api.23andme.com/3/profile/${profile}/marker/${snpName}`, {
-      auth: {
-        bearer: token,
-      },
-    }, (error, response, bod) => {
-      const data = JSON.parse(bod);
-      const variant = data.variants.map(a => (a.allele)).toString();
-      users.updateSNPs({ user_id: req.session.user.id, snp_id: snpID, variant })
-      .catch((err) => {
-        console.log(err);
+    return new Promise((resolve, reject) => {
+      request.get(`https://api.23andme.com/3/profile/${profile}/marker/${snpName}`, {
+        auth: {
+          bearer: token,
+        },
+      }, (error, response, bod) => {
+        if (error) { return reject(error); }
+        const data = JSON.parse(bod);
+        const variant = data.variants.map(a => (a.allele)).toString();
+        return resolve({ user_id: req.session.user.id, snp_id: snpID, variant });
       });
     });
   }
-  getTTAM(profile, token, 1, 'rs4994');
-  getTTAM(profile, token, 2, 'rs1042713');
-  getTTAM(profile, token, 3, 'i6010053');
-  getTTAM(profile, token, 4, 'rs1801282');
-  getTTAM(profile, token, 5, 'rs1042714');
 
-  res.redirect('/profile/');
+  Promise.all(
+    [getTTAM(profile, token, 1, 'rs4994'),
+      getTTAM(profile, token, 2, 'rs1042713'),
+      getTTAM(profile, token, 3, 'i6010053'),
+      getTTAM(profile, token, 4, 'rs1801282'),
+      getTTAM(profile, token, 5, 'rs1042714')])
+    .then((allData) => {
+      console.log(allData);
+      users.updateSNPs(allData)
+      .catch((err) => {
+        console.log(err);
+      });
+      res.redirect('/profile/');
+    });
 });
 
 module.exports = router;
