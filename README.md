@@ -1,9 +1,11 @@
 # nutriSNP
-[live site](https://nutrisnp.herokuapp.com/)
+[nutriSNP](https://nutrisnp.herokuapp.com/)
 
 Advanced calorie and macronutrient calculator based on users' unique genetic variants. Allows users to import their results from 23andMe and input some basic information about themselves to reveal recommendations tailored to them.
 
 ## Getting Started
+
+You will need Node and NPM in order to run this application. [These instructions](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/development_environment) from Mozilla provide straightforward instructions for installing Node and NPM.
 
 In order to get a copy of this application running on your local machine, simply download this repository and run the following command in the project folder.
 
@@ -32,7 +34,7 @@ This will run nutriSNP on port 3000.
 
 ## Data Model
 
-
+![data model](https://github.com/ama2488/nutriSNP/blob/8515b936ed4a3cd2b0bc4aa164cd2612036f01fd/ER1.png)
 
 ## Running the tests
 
