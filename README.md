@@ -32,7 +32,7 @@ This will run nutriSNP on port 3000.
 
 ## Data Model
 
-
+![data model]()
 
 ## Running the tests
 
