@@ -5,7 +5,7 @@ Advanced calorie and macronutrient calculator based on users' unique genetic var
 
 ## Getting Started
 
-In order to get a copy of this application running on your local machine, simply download this repository and run the following command in the project folder.
+In order to get a copy of this application running on your local machine, simply download this repository and run the following command in the project folder (this assumes you have Node and NPM installed.. If not, you may install these using [these instructions](https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/development_environment) from Mozilla.
 
 ```
 $ npm install
